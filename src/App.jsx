@@ -1,10 +1,19 @@
-import Formulario from "./components/Formulario";
 import Header from "./components/Header";
 import ListadoPacientes from "./components/ListadoPacientes";
-import { useState , useEffect} from "react";
+import { useState, useEffect } from "react";
+import Login from "./components/Login";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Register from "././components/Register";
+import Reset from "./components/Reset";
+import Dashboard from "./components/Dashboard";
+import { useParams } from "react-router";
+import "./app.css";
+
 function App() {
+  const [user, setUser] = useState(null);
   const [pacientes, setPacientes] = useState([]);
   const [paciente, setPaciente] = useState({});
+  const [tag, setTag] = useState(null);
 
   const eliminarPaciente = (id) => {
     console.log("eliminando paciwnte:", id);
@@ -13,35 +22,36 @@ function App() {
   };
 
   useEffect(() => {
-   const obtenerLS =()=>{
-      const pacientesLS = JSON.parse(localStorage.getItem('pacientes')) ?? [];
+    const obtenerLS = () => {
+      const pacientesLS = JSON.parse(localStorage.getItem("pacientes")) ?? [];
       setPacientes(pacientesLS);
-      console.log("pacientes obtenidos en LS", pacientesLS)
-   }
-   obtenerLS();
+      console.log("pacientes obtenidos en LS", pacientesLS);
+    };
+    obtenerLS();
 
-  }, [])
-  
+ 
+  }, []);
+
   useEffect(() => {
-    localStorage.setItem('pacientes', JSON.stringify(pacientes))
-  }, [pacientes])
+    localStorage.setItem("pacientes", JSON.stringify(pacientes));
+  }, [pacientes]);
+  
+ console.log("tag desde app", tag)
+ 
 
   return (
-    <div className=" container mx-0 align-middle  bg-slate-800 text-slate-400">
+    <div className="app align-middle backgro  bg-slate-800 text-slate-400" >
       <Header></Header>
-      <div className="mt-12 flex">
-        <Formulario
-          pacientes={pacientes}
-          setPacientes={setPacientes}
-          paciente={paciente}
-          setPaciente={setPaciente}
-        ></Formulario>
-        <ListadoPacientes
-          pacientes={pacientes}
-          setPaciente={setPaciente}
-          eliminarPaciente={eliminarPaciente}
-        ></ListadoPacientes>
-      </div>
+      <Router>
+        <Routes>
+          <Route exact path="/:id" element={<Login setTag={setTag} tag={tag} />} />
+          <Route exact path="/register" element={<Register />} />
+          <Route exact path="/reset" element={<Reset />} />
+          <Route exact path="/dashboard/" element={<Dashboard  props={tag}  />} />
+          <Route exact path="/" element={<Login setTag={setTag} tag={tag}  props={tag} />} />
+          <Route path="*" element={<div> La ruta no existe 404</div>} />
+        </Routes>
+      </Router>
     </div>
   );
 }

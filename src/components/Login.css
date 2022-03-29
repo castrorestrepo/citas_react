@@ -1,0 +1,80 @@
+.login {
+  padding-top: 1%;
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-bottom: 10%;
+  height: 100%;
+  width: 100%;
+  
+  align-items: center;
+  justify-content: center;
+}
+.header {
+  padding: 22%;
+  height: 80%;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  justify-content: center;
+}
+
+.avatar {
+  align-items: center;
+  padding: 1px;
+  border-radius: 160px;
+  border: 2px solid #4285f4;
+}
+.login__container {
+ 
+  text-align: center;
+  align-items:center;
+  align-self: center;
+  align-content: center;
+  height: 100%;
+  width: 100%;
+  background-color: #dcdcdc;
+  padding: 10px;
+}
+.login__textBox {
+  padding: 10px;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+.login__btn {
+  padding: 10px;
+  font-size: 18px;
+  margin-bottom: 10px;
+  border: none;
+  color: white;
+  background-color: black;
+}
+.login__google {
+  background-color: #4285f4;
+}
+.login div {
+  margin-top: 7px;
+}
+.box {
+  overflow: hidden;
+}
+
+.content {
+  font-size: 15px;
+  line-height: 20px;
+  padding: 0 20px;
+  text-align: justify;
+}
+
+.left {
+  float: left;
+  width: 50%;
+}
+
+.left .content {
+  border-right: 1px solid #4285f4  ;
+}
+
+.right {
+  float: right;
+  width: 50%;
+}
