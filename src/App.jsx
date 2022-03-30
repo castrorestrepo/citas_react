@@ -44,12 +44,13 @@ function App() {
       <Header></Header>
       <Router>
         <Routes>
-          <Route  path="/:id" element={<Login setTag={setTag} tag={tag} />} />
+          <Route  path="/:id" element={<Login setTag={setTag} tag={tag} />} >
+          </Route>
           <Route  path="/register" element={<Register />} />
           <Route  path="/reset" element={<Reset />} />
           <Route  path="/dashboard/" element={<Dashboard  props={tag}  />} />
           <Route  path="/" element={<Login setTag={setTag} tag={tag}  props={tag} />} />
-         
+          <Route path='*' element={<Login />} />
         </Routes>
       </Router>
     </div>
