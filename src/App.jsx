@@ -44,12 +44,12 @@ function App() {
       <Header></Header>
       <Router>
         <Routes>
-          <Route exact path="/:id" element={<Login setTag={setTag} tag={tag} />} />
-          <Route exact path="/register" element={<Register />} />
-          <Route exact path="/reset" element={<Reset />} />
-          <Route exact path="/dashboard/" element={<Dashboard  props={tag}  />} />
-          <Route exact path="/" element={<Login setTag={setTag} tag={tag}  props={tag} />} />
-          <Route path="*" element={<div> La ruta no existe 404</div>} />
+          <Route  path="/:id" element={<Login setTag={setTag} tag={tag} />} />
+          <Route  path="/register" element={<Register />} />
+          <Route  path="/reset" element={<Reset />} />
+          <Route  path="/dashboard/" element={<Dashboard  props={tag}  />} />
+          <Route  path="/" element={<Login setTag={setTag} tag={tag}  props={tag} />} />
+         
         </Routes>
       </Router>
     </div>
