@@ -174,7 +174,7 @@ function Login(props) {
               <span className="text-left  text-blue-500">
                 Alergias:{" "}
               </span>{" "}
-               {perfil.raza}
+               {perfil.alergias}
             </div>
             <br></br>
             <h1>
