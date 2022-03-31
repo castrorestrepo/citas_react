@@ -25,7 +25,7 @@ import { Avatar, Tag } from "antd";
 import { QuerySnapshot } from "firebase/firestore";
 import { async } from "@firebase/util";
 
-const backgroundImageURL = "/src/images/fondo.jpeg";
+const backgroundImageURL = "https://github.com/castrorestrepo/citas_react/blob/main/src/images/fondo.jpeg?raw=true";
 const containerStyle = {
   backgroundImage: `url(${backgroundImageURL})`,
   width: "100%",
