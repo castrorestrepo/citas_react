@@ -62,7 +62,7 @@ function Login(props) {
     } catch (err) {
       console.error(err);
       props.setTag(["No valido"]);
-      alert("Tag no valido error al consultar el Tag en la Base de datos");
+     // alert("Tag no valido error al consultar el Tag en la Base de datos");
     }
   };
 
