@@ -3,11 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate, useParams } from "react-router-dom";
 import "./Dashboard.css";
 
-<<<<<<< HEAD
 import { auth, db, logout, storage } from "../service/firebase";
-=======
-import { auth, db, logout } from "../service/firebase";
->>>>>>> 398e9ace61d2a34ffddd08fbb5217c443c965b55
 
 import {
   query,
@@ -18,10 +14,7 @@ import {
   updateDoc,
   doc,
 } from "firebase/firestore";
-<<<<<<< HEAD
 import { ref, getDownloadURL } from "firebase/storage";
-=======
->>>>>>> 398e9ace61d2a34ffddd08fbb5217c443c965b55
 
 import { async } from "@firebase/util";
 import { Card } from "antd";
@@ -29,13 +22,9 @@ import { data } from "autoprefixer";
 function Dashboard(props, tag) {
   const [user, loading, error] = useAuthState(auth);
   const [name, setName] = useState("");
-<<<<<<< HEAD
 
   const [mascotas, setMascotas] = useState([]);
   const [mascotas2, setMasctoas2] = useState([]);
-=======
-  const [mascotas, setMascotas] = useState([]);
->>>>>>> 398e9ace61d2a34ffddd08fbb5217c443c965b55
   const [mascota, setMascota] = useState({
     propietario: "",
     celular: "",
@@ -63,7 +52,6 @@ function Dashboard(props, tag) {
     } catch (err) {
       console.log("error al consultar usuario fetchuser:", err);
       // alert("An error occured while fetching user data", err);
-<<<<<<< HEAD
     }
   };
 
@@ -102,56 +90,13 @@ function Dashboard(props, tag) {
       );
     }
   };
-=======
-    }
-  };
-
-  function onChange(e) {
-    console.log("e", e);
-    setMascota({ ...mascota, [e.target.id]: e.target.value });
-  }
-  //guardar
-
-  const guardar = async () => {
-    try {
-      const docRef = await addDoc(collection(db, "tags"), {
-        first: "Ada",
-        last: "Lovelace",
-        born: 1815,
-      });
-      console.log("Document written with ID: ", docRef.id);
-      console.log("proceso de guardado...");
-    } catch (error) {
-      console.log("error al guardar", error);
-    }
-  };
-
-  const actualizar = async () => {
-    try {
-      const docRef = await updateDoc(doc(db, "tags", props.props), {
-        ...mascota,
-      });
-      console.log("Document actualizado: ", docRef);
-      console.log("proceso de guardado...");
-      alert("Información de la mascota guardad con exito");
-    } catch (error) {
-      console.log(
-        "Error al guardar información, comuniquese a la linea 3167482109",
-        error
-      );
-    }
-  };
->>>>>>> 398e9ace61d2a34ffddd08fbb5217c443c965b55
   const mostrar = () => {
     console.log(props.props);
     return <h1>hola</h1>;
   };
 
   const listar = async () => {
-<<<<<<< HEAD
     const mastocastmp = [];
-=======
->>>>>>> 398e9ace61d2a34ffddd08fbb5217c443c965b55
     try {
       console.log("entro a listar l el vlor user id es: ", user);
       //const q = query(collection(db, "tags"), where("uid", "==", "Q6eSbl96Mdc5IPOn9wB7gL2OFBE3" ));
@@ -160,32 +105,16 @@ function Dashboard(props, tag) {
         where("uid", "==", user ? user.uid : null)
       );
       const querySnapshot = await getDocs(q);
-<<<<<<< HEAD
       querySnapshot.forEach((doc) => {
         const id = doc.id;
         mastocastmp.push({ id, ...doc.data() });
       });
       setMascotas(mastocastmp);
-=======
-      const mascotastmp = [];
-      querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
-        const id = doc.id;
-        mascotastmp.push({ id, ...doc.data() });
-        //...doc.data(), id: doc.id
-        console.log(doc.id, " => ", doc.data());
-      });
-      console.log("masctoas tmp en el listar ", mascotastmp);
-      console.log("masctoas en el listar ", mascotas);
-      setMascotas(mascotastmp);
-   
->>>>>>> 398e9ace61d2a34ffddd08fbb5217c443c965b55
     } catch (error) {
       console.log("error al listar", error);
     }
   };
 
-<<<<<<< HEAD
   const listar2 = async () => {
     const mastocastmp = [];
     try {
@@ -214,19 +143,10 @@ function Dashboard(props, tag) {
       console.log("error al listar", error);
     }
   };
-=======
-  useEffect(() => {
-    if (user) {
-     // fetchUserName();
-      listar();
-    }
-  }, []);
->>>>>>> 398e9ace61d2a34ffddd08fbb5217c443c965b55
 
   useEffect(() => {
     if (loading) return;
     if (!user) return navigate("/");
-<<<<<<< HEAD
     fetchUserName();
     listar();
   listar2();
@@ -242,14 +162,6 @@ function Dashboard(props, tag) {
   console.log("mascota", mascota);
   console.log("mascotas", mascotas); 
   console.log("mascotas2", mascotas2);
-=======
-  }, [user, loading]);
-
-  // const { id } = useParams();
-  console.log("props en dashboars:", props);
-  console.log("mascota", mascota);
-  console.log("mascotas", mascotas);
->>>>>>> 398e9ace61d2a34ffddd08fbb5217c443c965b55
   return (
     <div className="dashboard">
       <div className="dashboard__container">
@@ -260,7 +172,6 @@ function Dashboard(props, tag) {
         Los siguientes son los Tags que tienes registrados y configurados a tus
         mascotas:
         <div>
-<<<<<<< HEAD
           {mascotas2 ? (
             <div>
               <tbody> 
@@ -322,67 +233,6 @@ function Dashboard(props, tag) {
           ) : (
             <div>
               <p>No se encontraron tags registrados en esta cuenta </p>
-=======
-          {mascotas ? (
-            <div>
-            <tbody>
-              {mascotas.map((dato, index) => (
-                <Card
-                  style={{
-                    background: "#C8D5E0",
-                    borderRadius: 8,
-                    textAlign: "start",
-                    margin: 5,
-                    width: 240,
-                  }}
-                >
-                  <tr
-                    style={{
-                      borderRadius: 8,
-                      textAlign: "start",
-                      width: "100%",
-                    }}
-                    key={dato.id}
-                  >
-                    <td
-                      style={{
-                        background: "#113E68",
-                        borderRadius: 8,
-                        textAlign: "start",
-                      }}
-                    >
-                      <span className="text-white  ">
-                        Mascota: {dato.nombremascota}{" "}
-                      </span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Tag:{dato.id}</td>
-                  </tr>
-
-                  <tr>
-                    <td>Celular de Contacto:{dato.pin}</td>
-                  </tr>
-                  <tr>
-                    <td>Fecha de nacimiento:{dato.fechanacimiento}</td>
-                  </tr>
-                  <tr>
-                    <td>Raza:{dato.raza}</td>
-                  </tr>
-                  <tr>
-                    <td>Alergias:{dato.alergias}</td>
-                  </tr>
-                  <tr>
-                    <td>Mensaje:{dato.mensaje}</td>
-                  </tr>
-                </Card>
-              ))}
-            </tbody>
-            </div>
-          ) : (
-            <div>
-            <p>No se encontraron tags registrados en esta cuenta </p>
->>>>>>> 398e9ace61d2a34ffddd08fbb5217c443c965b55
             </div>
           )}
           <br></br>
