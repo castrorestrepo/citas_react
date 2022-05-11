@@ -34,8 +34,9 @@ function Dashboard(props, tag) {
     raza: "",
     alergias: "",
     mensaje: "",
-    //uid: auth.currentUser.uid? auth.currentUser.uid : null
+    uid: ""
   });
+const avatar = "https://github.com/castrorestrepo/citas_react/blob/main/src/images/fondo.jpeg?raw=true";
 
   const navigate = useNavigate();
 
@@ -73,10 +74,16 @@ function Dashboard(props, tag) {
     } catch (error) {
       console.log("error al guardar", error);
     }
+    listar();
+    listar2();
   };
 
   const actualizar = async () => {
     try {
+      console.log("user useAuthState",useAuthState)
+      console.log("user auth.currentUser.uid",auth.currentUser.uid)
+
+      mascota.uid = auth.currentUser.uid;
       const docRef = await updateDoc(doc(db, "tags", props.props), {
         ...mascota,
       });
@@ -89,6 +96,8 @@ function Dashboard(props, tag) {
         error
       );
     }
+    listar();
+    listar2();
   };
   const mostrar = () => {
     console.log(props.props);
@@ -185,7 +194,8 @@ function Dashboard(props, tag) {
                       width: 240,
                     }}
                   >
-                    <img src={dato.imagenUrl} className="avatar"></img>
+                    {dato.imagenUrl ? <img src={dato.imagenUrl} className="avatar"></img> :<img src={avatar} className="avatar"></img>  }
+                    
 
                     <tr
                       style={{
@@ -237,97 +247,105 @@ function Dashboard(props, tag) {
           )}
           <br></br>
         </div>
+        {props.props ? 
         <div>
-          A continuacion se solicitan los datos de propietario y la mascota,
-          recuerde que estos serán los datos que obserbaran las personas que
-          escanean el tag cuando una mascota esta perdida y requiere ayuda, por
-          lo tanto asegurese de ingresar correctamente la información.
+        A continuacion se solicitan los datos de propietario y la mascota,
+        recuerde que estos serán los datos que obserbaran las personas que
+        escanean el tag cuando una mascota esta perdida y requiere ayuda, por
+        lo tanto asegurese de ingresar correctamente la información.
+        <br></br>
+        vamos a activar el TAG Numero:
+        <span className="text-red-500 text-center text-1xl ">
+          {" "}
+          <div>{props?.props}</div>
+        </span>
+        <br></br>
+        Nombres del propietario de la mascota:{" "}
+        <input
+          id="propietario"
+          value={mascota.propietario}
+          //onChange={(e) => onChange(e.target.value)}
+          onChange={(e) => onChange(e)}
+          className="normal__txt"
+        ></input>
+        <br></br>
+        <p> Celular de contacto: </p>
+        <input
+          id="celular"
+          value={mascota.celular}
+          //onChange={(e) => onChange(e.target.value)}
+          onChange={(e) => onChange(e)}
+          className="normal__txt"
+        ></input>
+        <p>Ingrese un pin de seguridad 4 digitos - no podra olvidarlo:</p>
+        <input
+          id="pin"
+          value={mascota.pin}
+          //onChange={(e) => onChange(e.target.value)}
+          onChange={(e) => onChange(e)}
+          className="normal__txt"
+        ></input>
+        <p>Nombre de la mascota:</p>
+        <input
+          id="nombremascota"
+          value={mascota.nombremascota}
+          //onChange={(e) => onChange(e.target.value)}
+          onChange={(e) => onChange(e)}
+          className="normal__txt"
+        ></input>
+        <p>Fecha nacimiento :</p>
+        <input
+          id="fechanacimiento"
+          value={mascota.fechanacimiento}
+          //onChange={(e) => onChange(e.target.value)}
+          onChange={(e) => onChange(e)}
+          className="normal__txt"
+        ></input>
+        <p>Raza :</p>
+        <input
+          id="raza"
+          value={mascota.raza}
+          //onChange={(e) => onChange(e.target.value)}
+          onChange={(e) => onChange(e)}
+          className="normal__txt"
+        ></input>
+        <p>Alergias :</p>
+        <input
+          id="alergias"
+          value={mascota.alergias}
+          //onChange={(e) => onChange(e.target.value)}
+          onChange={(e) => onChange(e)}
+          className="normal__txt"
+        ></input>
+        <p>Mensaje personalizado para mostrar a quien escanea el codigo:</p>
+        <input
+          id="mensaje"
+          value={mascota.mensaje}
+          //onChange={(e) => onChange(e.target.value)}
+          onChange={(e) => onChange(e)}
+          className="normal__txt"
+        ></input>
+        <p>
           <br></br>
-          vamos a activar el TAG Numero:
-          <span className="text-red-500 text-center text-1xl ">
-            {" "}
-            <div>{props?.props}</div>
-          </span>
-          <br></br>
-          Nombres del propietario de la mascota:{" "}
-          <input
-            id="propietario"
-            value={mascota.propietario}
-            //onChange={(e) => onChange(e.target.value)}
-            onChange={(e) => onChange(e)}
-            className="normal__txt"
-          ></input>
-          <br></br>
-          <p> Celular de contacto: </p>
-          <input
-            id="celular"
-            value={mascota.celular}
-            //onChange={(e) => onChange(e.target.value)}
-            onChange={(e) => onChange(e)}
-            className="normal__txt"
-          ></input>
-          <p>Ingrese un pin de seguridad 4 digitos - no podra olvidarlo:</p>
-          <input
-            id="pin"
-            value={mascota.pin}
-            //onChange={(e) => onChange(e.target.value)}
-            onChange={(e) => onChange(e)}
-            className="normal__txt"
-          ></input>
-          <p>Nombre de la mascota:</p>
-          <input
-            id="nombremascota"
-            value={mascota.nombremascota}
-            //onChange={(e) => onChange(e.target.value)}
-            onChange={(e) => onChange(e)}
-            className="normal__txt"
-          ></input>
-          <p>Fecha nacimiento :</p>
-          <input
-            id="fechanacimiento"
-            value={mascota.fechanacimiento}
-            //onChange={(e) => onChange(e.target.value)}
-            onChange={(e) => onChange(e)}
-            className="normal__txt"
-          ></input>
-          <p>Raza :</p>
-          <input
-            id="raza"
-            value={mascota.raza}
-            //onChange={(e) => onChange(e.target.value)}
-            onChange={(e) => onChange(e)}
-            className="normal__txt"
-          ></input>
-          <p>Alergias :</p>
-          <input
-            id="alergias"
-            value={mascota.alergias}
-            //onChange={(e) => onChange(e.target.value)}
-            onChange={(e) => onChange(e)}
-            className="normal__txt"
-          ></input>
-          <p>Mensaje personalizado para mostrar a quien escanea el codigo:</p>
-          <input
-            id="mensaje"
-            value={mascota.mensaje}
-            //onChange={(e) => onChange(e.target.value)}
-            onChange={(e) => onChange(e)}
-            className="normal__txt"
-          ></input>
-          <p>
-            <br></br>
 
-            <button className="normal__btn" onClick={actualizar}>
-              Gardar
-            </button>
-            <button className="normal__btn" onClick={listar}>
-              Mis Tags y mascotas
-            </button>
-          </p>
-          <button className="dashboard__btn" onClick={logout}>
-            Salir de la cuenta
+          <button className="normal__btn" onClick={actualizar}>
+            Gardar
           </button>
-        </div>
+          <button className="normal__btn" onClick={listar}>
+            Mis Tags y mascotas
+          </button>
+        </p>
+     
+      </div>
+        
+        :
+
+        <div>Si desea registrar un tag, cierre sesion y realice el escaneo del QR.</div>
+
+        }
+           <button className="dashboard__btn" onClick={logout}>
+          Salir de la cuenta
+        </button>
       </div>
     </div>
   );
