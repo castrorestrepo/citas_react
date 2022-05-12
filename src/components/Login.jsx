@@ -113,51 +113,48 @@ function Login(props) {
   return (
     <div className="login">
       <h1 className="text-gray-400 text-center text-1xl">Codigo:</h1>
-      <h1 className="text-red-500 text-center text-1xl ">{props.tag ? props.tag : "Codigo no escaneado" } </h1>
+      <h1 className="text-red-500 text-center text-1xl ">
+        {props.tag ? props.tag : "Codigo no escaneado"}{" "}
+      </h1>
       <div className="header" style={containerStyle}></div>
 
       <div className="login__container">
         {perfil.propietario ? (
-          <div>
-            <div className="box">
-              <div className="left">
-                <div className="content">
-                  <img src={imagen} className="avatar"></img>
-                </div>
-              </div>
-              <div className="right">
-                <div className="content">
-                  <span className="text-4xl  text-blue-500">
-                    Hola soy:
-                    <br></br> {perfil.nombremascota}{" "}
-                  </span>
-                </div>
-              </div>
-            </div>
-            <span className="text-1xl text-center "></span>{" "}
-            <h1>
-              {" "}
-              Es importante que conozcas mis
-              datos
-            </h1>
+          <div
+          style={{
            
+            width: "100%",
+          alignContent:"center"
+          }}
+          >
+            
+            <span className="text-4xl  text-blue-500">
+              Hola soy:
+              {perfil.nombremascota}{" "}
+          
+        
+            </span>
+            <img src={imagen} className="avatar"></img>
+           
+            <span className="text-1xl text-center "></span>{" "}
+            <h1> Es importante que conozcas mis datos</h1>
             <div
-            style={{
-              borderRadius: 8,
-              textAlign: "start",
-              width: "90%",
-              margin: "5%",
-              backgroundColor: "#c7c7d7",
-              borderColor: "red"
-              
-            }}
-            className="text-left text-gray-500">
+              style={{
+                borderRadius: 8,
+                textAlign: "start",
+                width: "90%",
+                margin: "5%",
+                backgroundColor: "#c7c7d7",
+                borderColor: "red",
+              }}
+              className="text-left text-gray-500"
+            >
               <h1> Mi propietario es : {perfil.propietario}</h1> Su número es:
               <span className="text-red-500 text-center text-1xl ">
                 {" "}
                 {perfil.celular}{" "}
               </span>
-<br></br>
+              <br></br>
               <span className="text-left  text-blue-500">
                 Fecha de nacimiento:{" "}
               </span>{" "}
@@ -168,25 +165,19 @@ function Login(props) {
               <br></br>
               <span className="text-left  text-blue-500">Alergias: </span>{" "}
               {perfil.alergias}
-            
             </div>
- 
-           
-           
- 
             <br></br>
             <div
-            style={{
-              borderRadius: 8,
-              textAlign: "start",
-              width: "90%",
-              margin: "5%",
-              backgroundColor: "#c7c7d7",
-              borderColor: "red"
-              
-            }}
-            className="text-left text-gray-500">
-             </div>
+              style={{
+                borderRadius: 8,
+                textAlign: "start",
+                width: "90%",
+                margin: "5%",
+                backgroundColor: "#c7c7d7",
+                borderColor: "red",
+              }}
+              className="text-left text-gray-500"
+            ></div>
             <br></br>
             <h1>
               <span className="text-1xl text-center  text-gray-400">
@@ -204,16 +195,16 @@ function Login(props) {
           </div>
         ) : (
           <div
-          style={{
-            padding:30,
-            textAlign: "justify",
-           
-          }}
+            style={{
+              padding: 30,
+              textAlign: "justify",
+            }}
           >
-              No hemos detectado un QR escaneado o el tag aun no ha sido activado, crea una cuenta o inicia sesion para registralo a tu mascota despues de escanear el QR.
-     
-            </div>
-           )}
+            No hemos detectado un QR escaneado o el tag aun no ha sido activado,
+            crea una cuenta o inicia sesion para registralo a tu mascota despues
+            de escanear el QR.
+          </div>
+        )}
 
         <div className="login">
           <input
@@ -253,36 +244,32 @@ function Login(props) {
           </div>
           <br></br>
           <span className="text-red-400 text-center ">
-              Todos los derechos reservados Petsid.com.co.{" "}
-            </span>
-            <br></br>
-            <span className="text-blue-400 text-center ">
-              Requieres ayuda? llama a la linea 3167482109{" "}
-            </span>
+            Todos los derechos reservados Petsid.com.co.{" "}
+          </span>
+          <br></br>
+          <span className="text-blue-400 text-center ">
+            Requieres ayuda? llama a la linea 3167482109{" "}
+          </span>
         </div>
-        
       </div>
       <div
-          style={{
-            borderRadius: 8,
-            textAlign: "justify",
-            width: "100%",
-            fontSize:8
-          }}
-          >
-            
-      
-            <span className="text-gray-400 text-center ">
-         
-              Petsid.com.co es un sistema de identificación de mascotas, la
-              información depositada por sus propietarios, será tratada conforma
-              la ley 1581 de 2022 y decretos reglamentario; no entregamos su
-              información a otras compañias, no obstante si su mascota se
-              extravia y alguien escanea el QR, podra conocer su nombre y datos
-              de contacto, para lo cual al usar y registrar un tag, autoriza que
-              susdatos sean expuestos ante la lectura del QR.
-            </span>
-          </div>
+        style={{
+          borderRadius: 8,
+          textAlign: "justify",
+          width: "100%",
+          fontSize: 8,
+        }}
+      >
+        <span className="text-gray-400 text-center ">
+          Petsid.com.co es un sistema de identificación de mascotas, la
+          información depositada por sus propietarios, será tratada conforma la
+          ley 1581 de 2022 y decretos reglamentario; no entregamos su
+          información a otras compañias, no obstante si su mascota se extravia y
+          alguien escanea el QR, podra conocer su nombre y datos de contacto,
+          para lo cual al usar y registrar un tag, autoriza que susdatos sean
+          expuestos ante la lectura del QR.
+        </span>
+      </div>
     </div>
   );
 }
