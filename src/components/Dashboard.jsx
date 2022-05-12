@@ -174,33 +174,37 @@ const avatar = "https://github.com/castrorestrepo/citas_react/blob/main/src/imag
   return (
     <div className="dashboard">
       <div className="dashboard__container">
-        Bienvenido: {user?.name}
-        Bienvenido2: {name ? name : "no name"}
+      
+        Hola {name ? name : "no name"}
         <div>{user?.email}</div>
         <br></br>
-        Los siguientes son los Tags que tienes registrados y configurados a tus
-        mascotas:
-        <div>
+        Tus mascotas actuales son:
+        
+        <div >
           {mascotas2 ? (
             <div>
               <tbody> 
                 {mascotas2.map((dato, index) => (
                   <Card
-                    style={{
+                  
+                    style={{ 
                       background: "#C8D5E0",
                       borderRadius: 8,
-                      textAlign: "start",
+                      padding:10,
                       margin: 5,
-                      width: 240,
+                      width: '280px',
+                      
                     }}
                   >
-                    {dato.imagenUrl ? <img src={dato.imagenUrl} className="avatar"></img> :<img src={avatar} className="avatar"></img>  }
+                    {dato.imagenUrl ? <img src={dato.imagenUrl } 
+                   
+                    className="avatar2"></img> :<img src={avatar} className="avatar2"></img>  }
                     
 
                     <tr
                       style={{
                         borderRadius: 8,
-                        textAlign: "start",
+                        
                         width: "100%",
                       }}
                       key={dato.id}
@@ -208,32 +212,78 @@ const avatar = "https://github.com/castrorestrepo/citas_react/blob/main/src/imag
                       <td
                         style={{
                           background: "#113E68",
-                          borderRadius: 8,
-                          textAlign: "start",
+                          borderRadius: 5,
+                          width: 260,
+                          padding:0,
+
                         }}
                       >
-                        <span className="text-white  ">
-                          Mascota: {dato.nombremascota}{" "}
+                        <span className="text-white font-extrabold "
+                         style={{
+                         fontSize: 25,
+                         width: 260,
+                        
+                        }}
+                        >
+                         {dato.nombremascota}{" "}
                         </span>
                       </td>
                     </tr>
-                    <tr>
-                      <td>Tag:{dato.id}</td>
+                    <tr
+                     style={{
+                      borderRadius: 8,
+                      textAlign: "start",
+                      width: "100%",
+                    }}
+                    >
+                      <td> <h1 className="text-red-500 text-1xl "> Tag:{dato.id} </h1>
+                      
+                       </td>
                     </tr>
 
-                    <tr>
+                    <tr
+                     style={{
+                      borderRadius: 8,
+                      textAlign: "start",
+                      width: "100%",
+                    }}
+                    >
                       <td>Celular de Contacto:{dato.pin}</td>
                     </tr>
-                    <tr>
+                    <tr
+                     style={{
+                      borderRadius: 8,
+                      textAlign: "start",
+                      width: "100%",
+                    }}
+                    >
                       <td>Fecha de nacimiento:{dato.fechanacimiento}</td>
                     </tr>
-                    <tr>
+                    <tr
+                     style={{
+                      borderRadius: 8,
+                      textAlign: "start",
+                      width: "100%",
+                    }}
+                    >
                       <td>Raza:{dato.raza}</td>
                     </tr>
-                    <tr>
+                    <tr
+                     style={{
+                      borderRadius: 8,
+                      textAlign: "start",
+                      width: "100%",
+                    }}
+                    >
                       <td>Alergias:{dato.alergias}</td>
                     </tr>
-                    <tr>
+                    <tr
+                     style={{
+                      borderRadius: 8,
+                      textAlign: "start",
+                      width: "100%",
+                    }}
+                    >
                       <td>Mensaje:{dato.mensaje}</td>
                     </tr>
                   </Card>
@@ -340,7 +390,13 @@ const avatar = "https://github.com/castrorestrepo/citas_react/blob/main/src/imag
         
         :
 
-        <div>Si desea registrar un tag, cierre sesion y realice el escaneo del QR.</div>
+        <div
+         style={{ 
+          
+          width: '280px',
+          
+        }}
+        >Si desea registrar un nuevo tag, de clic en "Salir de la cuenta", luego escanee el QR e inicie sesion luego de escanear para activarlo.</div>
 
         }
            <button className="dashboard__btn" onClick={logout}>

@@ -25,7 +25,8 @@ import { Avatar, Tag } from "antd";
 import { QuerySnapshot } from "firebase/firestore";
 import { async } from "@firebase/util";
 
-const backgroundImageURL = "https://github.com/castrorestrepo/citas_react/blob/main/src/images/fondo.jpeg?raw=true";
+const backgroundImageURL =
+  "https://github.com/castrorestrepo/citas_react/blob/main/src/images/fondo.jpeg?raw=true";
 const containerStyle = {
   backgroundImage: `url(${backgroundImageURL})`,
   width: "100%",
@@ -62,7 +63,7 @@ function Login(props) {
     } catch (err) {
       console.error(err);
       props.setTag(["No valido"]);
-     // alert("Tag no valido error al consultar el Tag en la Base de datos");
+      // alert("Tag no valido error al consultar el Tag en la Base de datos");
     }
   };
 
@@ -112,7 +113,7 @@ function Login(props) {
   return (
     <div className="login">
       <h1 className="text-gray-400 text-center text-1xl">Codigo:</h1>
-      <h1 className="text-red-500 text-center text-1xl ">{props.tag} </h1>
+      <h1 className="text-red-500 text-center text-1xl ">{props.tag ? props.tag : "Codigo no escaneado" } </h1>
       <div className="header" style={containerStyle}></div>
 
       <div className="login__container">
@@ -127,7 +128,8 @@ function Login(props) {
               <div className="right">
                 <div className="content">
                   <span className="text-4xl  text-blue-500">
-                    Hola soy {perfil.nombremascota}{" "}
+                    Hola soy:
+                    <br></br> {perfil.nombremascota}{" "}
                   </span>
                 </div>
               </div>
@@ -160,21 +162,17 @@ function Login(props) {
               Mi perfil:{" "}
             </span>
             <br></br>
-            <div className="text-left text-gray-500 bg-slate-300" >
+            <div className="text-left text-gray-500 bg-slate-300">
               <span className="text-left  text-blue-500">
                 Fecha de nacimiento:{" "}
               </span>{" "}
               {perfil.fechanacimiento}
               <br></br>
-              <span className="text-left  text-blue-500">
-                Raza:{" "}
-              </span>{" "}
-               {perfil.raza}
-               <br></br>
-              <span className="text-left  text-blue-500">
-                Alergias:{" "}
-              </span>{" "}
-               {perfil.alergias}
+              <span className="text-left  text-blue-500">Raza: </span>{" "}
+              {perfil.raza}
+              <br></br>
+              <span className="text-left  text-blue-500">Alergias: </span>{" "}
+              {perfil.alergias}
             </div>
             <br></br>
             <h1>
@@ -192,44 +190,86 @@ function Login(props) {
             se encontró en la base de datos.
           </div>
         ) : (
-          "Este tag aun no ha sido registrado, crea una cuenta o inicia sesion para registralo a tu mascota."
-        )}
+          <div
+          style={{
+            padding:30,
+            textAlign: "justify",
+           
+          }}
+          >
+              No hemos detectado un QR escaneado o el tag aun no ha sido activado, crea una cuenta o inicia sesion para registralo a tu mascota despues de escanear el QR.
+     
+            </div>
+           )}
 
         <div className="login">
-           <input
-          type="text"
-          className="login__textBox"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="E-mail Address"
-        />
+          <input
+            type="text"
+            className="login__textBox"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="E-mail Address"
+          />
+          <br></br>
+          <input
+            type="password"
+            className="login__textBox"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+          />
+          <br></br>
+          <button
+            className="login__btn"
+            onClick={() => logInWithEmailAndPassword(email, password)}
+          >
+            Login
+          </button>
+          <br></br>
+          <button
+            className="login__btn login__google"
+            onClick={signInWithGoogle}
+          >
+            Login with Google
+          </button>
+          <div>
+            <Link to="/reset">Recordar Password</Link>
+          </div>
+          <div>
+            No tienes una cuenta? <Link to="/register">Registrate</Link> ahora
+          </div>
+          <br></br>
+          <span className="text-red-400 text-center ">
+              Todos los derechos reservados Petsid.com.co.{" "}
+            </span>
+            <br></br>
+            <span className="text-blue-400 text-center ">
+              Requieres ayuda? llama a la linea 3167482109{" "}
+            </span>
+        </div>
         
-        <input
-          type="password"
-          className="login__textBox"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-        />     
-        <button
-          className="login__btn"
-          onClick={() => logInWithEmailAndPassword(email, password)}
-        >
-          Login
-        </button>
-
-        <button className="login__btn login__google" onClick={signInWithGoogle}>
-          Login with Google
-        </button>
-        <div>
-          <Link to="/reset">Recordar Password</Link>
-        </div>
-        <div>
-          No tienes una cuenta? <Link to="/register">Registrate</Link> ahora
-        </div>
-
-        </div>
-             </div>
+      </div>
+      <div
+          style={{
+            borderRadius: 8,
+            textAlign: "justify",
+            width: "100%",
+            fontSize:8
+          }}
+          >
+            
+      
+            <span className="text-gray-400 text-center ">
+         
+              Petsid.com.co es un sistema de identificación de mascotas, la
+              información depositada por sus propietarios, será tratada conforma
+              la ley 1581 de 2022 y decretos reglamentario; no entregamos su
+              información a otras compañias, no obstante si su mascota se
+              extravia y alguien escanea el QR, podra conocer su nombre y datos
+              de contacto, para lo cual al usar y registrar un tag, autoriza que
+              susdatos sean expuestos ante la lectura del QR.
+            </span>
+          </div>
     </div>
   );
 }
