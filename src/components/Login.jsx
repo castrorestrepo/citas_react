@@ -136,33 +136,28 @@ function Login(props) {
             </div>
             <span className="text-1xl text-center "></span>{" "}
             <h1>
-              <div className="titulomascota">
-                <div className="titulomascotaizquierda"></div>
-                <div className="titulomascotaderecha"> </div>
-              </div>
+              {" "}
+              Es importante que conozcas mis
+              datos
             </h1>
-            <br></br>
-            <div className="text-left text-gray-500">
+           
+            <div
+            style={{
+              borderRadius: 8,
+              textAlign: "start",
+              width: "90%",
+              margin: "5%",
+              backgroundColor: "#c7c7d7",
+              borderColor: "red"
+              
+            }}
+            className="text-left text-gray-500">
               <h1> Mi propietario es : {perfil.propietario}</h1> Su número es:
               <span className="text-red-500 text-center text-1xl ">
                 {" "}
                 {perfil.celular}{" "}
               </span>
-            </div>
-            <h1></h1>
-            <br></br>
-            <h1>
-              {" "}
-              Mientras mi familia me recoge es importante que conozcas mis
-              datos:
-            </h1>
-            <br></br>
-            <span className="text-3xl text-center  text-blue-500">
-              {" "}
-              Mi perfil:{" "}
-            </span>
-            <br></br>
-            <div className="text-left text-gray-500 bg-slate-300">
+<br></br>
               <span className="text-left  text-blue-500">
                 Fecha de nacimiento:{" "}
               </span>{" "}
@@ -173,7 +168,25 @@ function Login(props) {
               <br></br>
               <span className="text-left  text-blue-500">Alergias: </span>{" "}
               {perfil.alergias}
+            
             </div>
+ 
+           
+           
+ 
+            <br></br>
+            <div
+            style={{
+              borderRadius: 8,
+              textAlign: "start",
+              width: "90%",
+              margin: "5%",
+              backgroundColor: "#c7c7d7",
+              borderColor: "red"
+              
+            }}
+            className="text-left text-gray-500">
+             </div>
             <br></br>
             <h1>
               <span className="text-1xl text-center  text-gray-400">
