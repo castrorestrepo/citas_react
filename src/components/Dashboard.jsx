@@ -356,7 +356,7 @@ const avatar = "https://github.com/castrorestrepo/citas_react/blob/main/src/imag
                       )
                       
                       } >
-            Modiifcar
+            Modifcar
           </button>
                   </Card>
                 ))}
