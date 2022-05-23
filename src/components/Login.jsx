@@ -25,6 +25,8 @@ import { Avatar, Tag } from "antd";
 import { QuerySnapshot } from "firebase/firestore";
 import { async } from "@firebase/util";
 
+
+
 const backgroundImageURL =
   "https://github.com/castrorestrepo/citas_react/blob/main/src/images/fondo.jpeg?raw=true";
 const containerStyle = {
@@ -73,12 +75,13 @@ function Login(props) {
       return;
     }
     if (user) {
+      
       navigate("/dashboard");
     }
     fetchTags();
 
     perfil ? props.setTag(id) : props.setTag("no Valido");
-
+  
     console.log("props en login:");
     console.log(props);
 
@@ -110,8 +113,11 @@ function Login(props) {
     }
   }, [user, loading]);
 
+  const backgroundImageURL0 = "../src/images/bacground1.jpeg";
+  
+
   return (
-    <div className="login">
+    <div className="login"  >
       <h1 className="text-gray-400 text-center text-1xl">Codigo:</h1>
       <h1 className="text-red-500 text-center text-1xl ">
         {props.tag ? props.tag : "Codigo no escaneado"}{" "}
@@ -165,6 +171,9 @@ function Login(props) {
               <br></br>
               <span className="text-left  text-blue-500">Alergias: </span>{" "}
               {perfil.alergias}
+              <br></br>
+              <span className="text-left  text-blue-500">Mensaje: </span>{" "}
+              {perfil.mensaje}
             </div>
             <br></br>
             <div
@@ -209,6 +218,7 @@ function Login(props) {
         <div className="login">
           <input
             type="text"
+            style={{borderRadius:8}}
             className="login__textBox"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -217,6 +227,7 @@ function Login(props) {
           <br></br>
           <input
             type="password"
+            style={{borderRadius:8}}
             className="login__textBox"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -224,6 +235,7 @@ function Login(props) {
           />
           <br></br>
           <button
+          style={{borderRadius:8}}
             className="login__btn"
             onClick={() => logInWithEmailAndPassword(email, password)}
           >
@@ -233,6 +245,7 @@ function Login(props) {
           <button
             className="login__btn login__google"
             onClick={signInWithGoogle}
+            style={{borderRadius:8}}
           >
             Login with Google
           </button>

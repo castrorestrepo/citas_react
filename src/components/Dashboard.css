@@ -28,6 +28,15 @@
     border-color: rgb(93, 162, 184);
    
   }
+  .edit__btn {
+    padding: 4px;
+    font-size: 12px;
+    background-color: rgb(17, 62, 104);
+    color: rgb(255, 255, 255);
+    border-radius: 5px;
+    border-color: rgb(93, 162, 184);
+   
+  }
   .normal__txt {
     padding: 4px;
     font-size: 12px;
@@ -40,4 +49,7 @@
   .dashboard div {
     height: 100%;
     align-items: center;
+  }
+  .form__div {
+    color: white;
   }

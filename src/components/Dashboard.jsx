@@ -19,10 +19,12 @@ import { ref, getDownloadURL } from "firebase/storage";
 import { async } from "@firebase/util";
 import { Card } from "antd";
 import { data } from "autoprefixer";
-function Dashboard(props, tag) {
+
+
+function Dashboard(props) {
   const [user, loading, error] = useAuthState(auth);
   const [name, setName] = useState("");
-
+  const [propietario,setPropietario] = useState(true);
   const [mascotas, setMascotas] = useState([]);
   const [mascotas2, setMasctoas2] = useState([]);
   const [mascota, setMascota] = useState({
@@ -34,7 +36,8 @@ function Dashboard(props, tag) {
     raza: "",
     alergias: "",
     mensaje: "",
-    uid: ""
+    uid: "",
+    id: props.props? props.props : ""
   });
 const avatar = "https://github.com/castrorestrepo/citas_react/blob/main/src/images/fondo.jpeg?raw=true";
 
@@ -55,6 +58,8 @@ const avatar = "https://github.com/castrorestrepo/citas_react/blob/main/src/imag
       // alert("An error occured while fetching user data", err);
     }
   };
+
+
 
   function onChange(e) {
     console.log("e", e);
@@ -84,7 +89,7 @@ const avatar = "https://github.com/castrorestrepo/citas_react/blob/main/src/imag
       console.log("user auth.currentUser.uid",auth.currentUser.uid)
 
       mascota.uid = auth.currentUser.uid;
-      const docRef = await updateDoc(doc(db, "tags", props.props), {
+      const docRef = await updateDoc(doc(db, "tags", mascota.id ? mascota.id : props.props ), {
         ...mascota,
       });
       console.log("Document actualizado: ", docRef);
@@ -158,19 +163,71 @@ const avatar = "https://github.com/castrorestrepo/citas_react/blob/main/src/imag
     if (!user) return navigate("/");
     fetchUserName();
     listar();
-  listar2();
+    listar2();
+    consultarTag();
+
   }, [user, loading]);
 
   useEffect(() => {
-    
+
   listar2();
   }, [mascotas]);
+ 
+
+  useEffect(() => {
+    if (user != null){
+      if (mascota.uid == user.uid || mascota.uid == null ){
+      setPropietario(true)
+      console.log("propietario",mascota);
+    } 
+    else
+    {
+     setPropietario(false)
+     console.log("No propietario",mascota);
+    }
+    }
+    
+    }, [mascota]);
+  
+  
+  
+
 
   // const { id } = useParams();
   console.log("props en dashboars:", props);
   console.log("mascota", mascota);
   console.log("mascotas", mascotas); 
   console.log("mascotas2", mascotas2);
+
+
+
+  
+  let result=mascotas.filter(m=>m.id==props.props);
+  console.log(result.length?"existe":"no existe",result);
+
+
+  const consultarTag = async () => {
+    try {
+      const q = query(
+        collection(db, "tags"),
+        where("__name__", "==", props.props)
+      );
+      const doc = await getDocs(q);
+      const data = doc.docs[0].data();
+      // props.setTag(data.id);
+      if (data.pin) {
+        setMascota(data); 
+      } else {
+        setMascota("");
+      }
+    } catch (err) {
+      console.error(err);
+    //  props.setTag(["No valido"]);
+      // alert("Tag no valido error al consultar el Tag en la Base de datos");
+    }
+  };
+  
+
   return (
     <div className="dashboard">
       <div className="dashboard__container">
@@ -181,10 +238,10 @@ const avatar = "https://github.com/castrorestrepo/citas_react/blob/main/src/imag
         Tus mascotas actuales son:
         
         <div >
-          {mascotas2 ? (
+          {mascotas2.length ? (
             <div>
               <tbody> 
-                {mascotas2.map((dato, index) => (
+                {mascotas2.map((dato, id) => (
                   <Card
                   
                     style={{ 
@@ -228,6 +285,7 @@ const avatar = "https://github.com/castrorestrepo/citas_react/blob/main/src/imag
                          {dato.nombremascota}{" "}
                         </span>
                       </td>
+                     
                     </tr>
                     <tr
                      style={{
@@ -248,7 +306,7 @@ const avatar = "https://github.com/castrorestrepo/citas_react/blob/main/src/imag
                       width: "100%",
                     }}
                     >
-                      <td>Celular de Contacto:{dato.pin}</td>
+                      <td>Celular de Contacto:{dato.celular}</td>
                     </tr>
                     <tr
                      style={{
@@ -286,31 +344,65 @@ const avatar = "https://github.com/castrorestrepo/citas_react/blob/main/src/imag
                     >
                       <td>Mensaje:{dato.mensaje}</td>
                     </tr>
+                    <button  className="edit__btn" onClick={
+                     
+                      ()=>
+                      (
+                        
+                         setMascota(...mascotas2.filter(m=>m.id==dato.id),
+                        
+                         )
+                       
+                      )
+                      
+                      } >
+            Modiifcar
+          </button>
                   </Card>
                 ))}
               </tbody>
             </div>
-          ) : (
-            <div>
+          ) : 
+     
               <p>No se encontraron tags registrados en esta cuenta </p>
-            </div>
-          )}
+           
+          }
           <br></br>
         </div>
-        {props.props ? 
-        <div>
-        A continuacion se solicitan los datos de propietario y la mascota,
-        recuerde que estos serán los datos que obserbaran las personas que
-        escanean el tag cuando una mascota esta perdida y requiere ayuda, por
-        lo tanto asegurese de ingresar correctamente la información.
-        <br></br>
-        vamos a activar el TAG Numero:
+        {(props.props)  ? 
+        <div 
+        style={{ 
+          background: "#C8D5E0",
+          borderRadius: 8,
+          padding:10,
+          margin: 5,
+          width: '280px',
+          color: '#00337B'
+        }}
+        >
+          <div className="form__div"
+           style={{
+            background: "#113E68",
+            borderRadius: 5,
+            width: 260,
+            padding:0,
+            
+          }}
+          >
+          Ingrese o modifique los datos de su mascota.    
+            </div>
+     
+  
+
+        TAG Número:
         <span className="text-red-500 text-center text-1xl ">
           {" "}
-          <div>{props?.props}</div>
+          <div>{mascota.id? mascota.id : props.props}</div>
+          <div></div>
         </span>
         <br></br>
-        Nombres del propietario de la mascota:{" "}
+        Propietario de la mascota:{" "}
+        <br></br>
         <input
           id="propietario"
           value={mascota.propietario}
@@ -327,7 +419,7 @@ const avatar = "https://github.com/castrorestrepo/citas_react/blob/main/src/imag
           onChange={(e) => onChange(e)}
           className="normal__txt"
         ></input>
-        <p>Ingrese un pin de seguridad 4 digitos - no podra olvidarlo:</p>
+        <p>Asigne un pin de seguridad:</p>
         <input
           id="pin"
           value={mascota.pin}
@@ -377,13 +469,18 @@ const avatar = "https://github.com/castrorestrepo/citas_react/blob/main/src/imag
         ></input>
         <p>
           <br></br>
-
-          <button className="normal__btn" onClick={actualizar}>
+          {
+            propietario  ?  
+            <button  className="normal__btn" onClick={actualizar} >
             Gardar
           </button>
-          <button className="normal__btn" onClick={listar}>
-            Mis Tags y mascotas
-          </button>
+          :
+          <div>
+          <p> "No eres el propietario"</p> 
+          </div>
+          }
+         
+       
         </p>
      
       </div>

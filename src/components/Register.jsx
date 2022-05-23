@@ -22,17 +22,23 @@ function Register() {
     if (user) history.replace("/dashboard");
   }, [user, loading]);
   return (
-    <div className="register">
-      <div className="register__container">
+    <div 
+   
+    className="register">
+      <div className="register__container"
+      style={{borderRadius:8}}
+      >
         <input
           type="text"
+          style={{borderRadius:8}}
           className="register__textBox"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder="Full Name"
+          placeholder="Nombres"
         />
         <input
           type="text"
+          style={{borderRadius:8}}
           className="register__textBox"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -40,22 +46,27 @@ function Register() {
         />
         <input
           type="password"
+          style={{borderRadius:8}}
           className="register__textBox"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
         />
-        <button className="register__btn" onClick={register}>
-          Register
+        <button 
+        className="register__btn" 
+        style={{borderRadius:8}}
+        onClick={register}>
+          Registrarme
         </button>
         <button
           className="register__btn register__google"
           onClick={signInWithGoogle}
+          style={{borderRadius:8}}
         >
-          Register with Google
+          Registrarme con Google
         </button>
         <div>
-          Already have an account? <Link to="/">Login</Link> now.
+          Ya tienes una cuenta? <Link to="/">Ingresar</Link> ahora.
         </div>
       </div>
     </div>
