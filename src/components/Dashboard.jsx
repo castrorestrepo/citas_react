@@ -25,6 +25,8 @@ function Dashboard(props) {
   const [user, loading, error] = useAuthState(auth);
   const [name, setName] = useState("");
   const [propietario,setPropietario] = useState(true);
+  const [editing, setEditing] = useState(false);
+
   const [mascotas, setMascotas] = useState([]);
   const [mascotas2, setMasctoas2] = useState([]);
   const [mascota, setMascota] = useState({
@@ -81,6 +83,7 @@ const avatar = "https://github.com/castrorestrepo/citas_react/blob/main/src/imag
     }
     listar();
     listar2();
+    
   };
 
   const actualizar = async () => {
@@ -103,6 +106,7 @@ const avatar = "https://github.com/castrorestrepo/citas_react/blob/main/src/imag
     }
     listar();
     listar2();
+    setEditing(false);
   };
   const mostrar = () => {
     console.log(props.props);
@@ -165,7 +169,7 @@ const avatar = "https://github.com/castrorestrepo/citas_react/blob/main/src/imag
     listar();
     listar2();
     consultarTag();
-
+    
   }, [user, loading]);
 
   useEffect(() => {
@@ -186,11 +190,15 @@ const avatar = "https://github.com/castrorestrepo/citas_react/blob/main/src/imag
      console.log("No propietario",mascota);
     }
     }
+
+    if (props.props){
+      setEditing(true)
+    }
     
     }, [mascota]);
   
   
-  
+    
 
 
   // const { id } = useParams();
@@ -350,7 +358,7 @@ const avatar = "https://github.com/castrorestrepo/citas_react/blob/main/src/imag
                       (
                         
                          setMascota(...mascotas2.filter(m=>m.id==dato.id),
-                        
+                         setEditing(true)
                          )
                        
                       )
@@ -369,7 +377,7 @@ const avatar = "https://github.com/castrorestrepo/citas_react/blob/main/src/imag
           }
           <br></br>
         </div>
-        {(props.props)  ? 
+        {(editing)  ? 
         <div 
         style={{ 
           background: "#C8D5E0",
