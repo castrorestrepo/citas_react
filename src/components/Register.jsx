@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Link, useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   auth,
   registerWithEmailAndPassword,
@@ -19,18 +19,18 @@ function Register() {
   };
   useEffect(() => {
     if (loading) return;
-    if (user) history.replace("/dashboard");
+    if (user){
+      console.log("user",user);
+      console.log("history", history)
+    }
+   // if (user) history.replace("/dashboard");
   }, [user, loading]);
   return (
-    <div 
-   
-    className="register">
-      <div className="register__container"
-      style={{borderRadius:8}}
-      >
+    <div className="register">
+      <div className="register__container" style={{ borderRadius: 8 }}>
         <input
           type="text"
-          style={{borderRadius:8}}
+          style={{ borderRadius: 8 }}
           className="register__textBox"
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -38,7 +38,7 @@ function Register() {
         />
         <input
           type="text"
-          style={{borderRadius:8}}
+          style={{ borderRadius: 8 }}
           className="register__textBox"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -46,22 +46,23 @@ function Register() {
         />
         <input
           type="password"
-          style={{borderRadius:8}}
+          style={{ borderRadius: 8 }}
           className="register__textBox"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
         />
-        <button 
-        className="register__btn" 
-        style={{borderRadius:8}}
-        onClick={register}>
+        <button
+          className="register__btn"
+          style={{ borderRadius: 8 }}
+          onClick={register}
+        >
           Registrarme
         </button>
         <button
           className="register__btn register__google"
           onClick={signInWithGoogle}
-          style={{borderRadius:8}}
+          style={{ borderRadius: 8 }}
         >
           Registrarme con Google
         </button>

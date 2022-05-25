@@ -203,16 +203,18 @@ function Login(props) {
             se encontró en la base de datos.
           </div>
         ) : (
+          <div> Bienvenido a PetsID
           <div
             style={{
               padding: 30,
               textAlign: "justify",
             }}
           >
-            No hemos detectado un QR escaneado o el tag aun no ha sido activado,
-            crea una cuenta o inicia sesion para registralo a tu mascota despues
-            de escanear el QR.
+          No hemos detectado un QR escaneado o aun no ha sido activado,
+            Crea una ceunta , registrate con Google, escanea tu QR y activalo ahora. 
           </div>
+            </div>
+         
         )}
 
         <div className="login">

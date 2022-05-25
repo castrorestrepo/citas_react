@@ -21,30 +21,35 @@ function App() {
     setPacientes(pacientesACtualizados);
   };
 
-  useEffect(() => {
-    const obtenerLS = () => {
-      const pacientesLS = JSON.parse(localStorage.getItem("pacientes")) ?? [];
-      setPacientes(pacientesLS);
-      console.log("pacientes obtenidos en LS", pacientesLS);
-    };
-    obtenerLS();
-  }, []);
+ // useEffect(() => {
+   // const obtenerLS = () => {
+    //  const pacientesLS = JSON.parse(localStorage.getItem("pacientes")) ?? [];
+    //  setPacientes(pacientesLS);
+    //  console.log("pacientes obtenidos en LS", pacientesLS);
+   // }
+  //  obtenerLS();
+  //}, []);
 
-  useEffect(() => {
-    localStorage.setItem("pacientes", JSON.stringify(pacientes));
-  }, [pacientes]);
+  //useEffect(() => {
+  //  localStorage.setItem("pacientes", JSON.stringify(pacientes));
+  //}, [pacientes]);
 
   console.log("tag desde app", tag);
 
-  const backgroundImageURL0 = "../src/images/bacground4.jpg";
+  const backgroundImageURL0 =   "https://github.com/castrorestrepo/citas_react/blob/main/src/images/bacground4.jpg?raw=true";
+
+
   const containerStyle0 = {
     backgroundImage: `url(${backgroundImageURL0})`,
     width: "100%",
     height: "100%",
-    backgroundSize: "repeat",
-    backgroundRepeat: "repeat",
-    zIndex: -1 ,
+    backgroundPosition: 'center',
 
+    backgroundRepeat: "repeat",
+    backgroundSize: 'cover',
+    overflow: 'hidden',
+    zIndex: -1 ,
+    
   };
 
 

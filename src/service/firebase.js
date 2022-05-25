@@ -53,8 +53,10 @@ const signInWithGoogle = async () => {
         name: user.displayName,
         authProvider: "google",
         email: user.email,
-      });
+      }
+      );
     }
+    
   } catch (err) {
     console.error(err);
     alert(err.message);
