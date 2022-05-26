@@ -228,6 +228,7 @@ function Dashboard(props) {
   return (
     <div className="dashboard">
       <div className="dashboard__container">
+        <br></br>
         Hola {name ? name : "no name"}
         <div>{user?.email}</div>
         <br></br>
@@ -491,6 +492,7 @@ function Dashboard(props) {
         <button className="dashboard__btn" onClick={logout}>
           Salir de la cuenta
         </button>
+        <br></br>
       </div>
     </div>
   );

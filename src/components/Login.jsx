@@ -28,17 +28,12 @@ import { async } from "@firebase/util";
 
 
 const backgroundImageURL =
-  "https://github.com/castrorestrepo/citas_react/blob/main/src/images/fondo.jpeg?raw=true";
+  "images/fondo.jpeg";
 const containerStyle = {
   backgroundImage: `url(${backgroundImageURL})`,
   width: "100%",
   height: "100%",
 };
-
-const img1 ="././public/images/bacground1.jpeg";
-  const img2 =".././public/images/bacground1.jpeg";
-  "https://github.com/castrorestrepo/citas_react/blob/main/src/images/fondo.jpeg?raw=true";
-
 
 
 function Login(props) {
@@ -119,22 +114,27 @@ function Login(props) {
     }
   }, [user, loading]);
 
-  const backgroundImageURL0 = "../src/images/bacground1.jpeg";
+  const backgroundImageURL0 = "images/bacground1.jpeg";
+  const logo = "images/icon-id.png";
+  
   
 
   return (
     <div className="login"  >
-       <img src={img1} className="avatar"></img>
-       <img src={img2} className="avatar"></img>
            
+       <div className="header" style={containerStyle}>
+        
+      </div>
 
+      <div className="login__container">
+        <br></br>
       <h1 className="text-gray-400 text-center text-1xl">Codigo:</h1>
       <h1 className="text-red-500 text-center text-1xl ">
         {props.tag ? props.tag : "Codigo no escaneado"}{" "}
+      <br></br>  ¿Quieres comprar un tag ahora?
       </h1>
-      <div className="header" style={containerStyle}></div>
-
-      <div className="login__container">
+      
+    
         {perfil.propietario ? (
           <div
           style={{
@@ -153,15 +153,17 @@ function Login(props) {
             <img src={imagen} className="avatar"></img>
            
             <span className="text-1xl text-center "></span>{" "}
-            <h1> Es importante que conozcas mis datos</h1>
-            <div
+            
+             <div
               style={{
                 borderRadius: 8,
                 textAlign: "start",
-                width: "90%",
-                margin: "5%",
+                width: "80%",
+                marginLeft: "10%",
+                marginRight: "10%",
                 backgroundColor: "#c7c7d7",
                 borderColor: "red",
+            
               }}
               className="text-left text-gray-500"
             >
@@ -185,7 +187,7 @@ function Login(props) {
               <span className="text-left  text-blue-500">Mensaje: </span>{" "}
               {perfil.mensaje}
             </div>
-            <br></br>
+        
             <div
               style={{
                 borderRadius: 8,
@@ -197,13 +199,20 @@ function Login(props) {
               }}
               className="text-left text-gray-500"
             ></div>
-            <br></br>
-            <h1>
-              <span className="text-1xl text-center  text-gray-400">
-                {" "}
-                Sieres propietario de un tag de PetsID, puedes iniciar Sesion a
-                continuacion para registrar o actualizar datos de tu mascota
-              </span>{" "}
+        
+            <h1
+            style={{
+             alignContent:'center',
+             textAlign:'center',
+             alignItems:'center',
+              width: '90%',
+              marginLeft:'4%',
+              marginRight:'4%'
+              }}
+            >
+               
+Si eres propietario de un tag de PetsID, puedes iniciar sesión a continuación para registrar o actualizar datos de tu mascota
+         
             </h1>
           </div>
         ) : props.tag == "No valido" ? (
@@ -216,13 +225,16 @@ function Login(props) {
           <div> Bienvenido a PetsID
           <div
             style={{
-              padding: 30,
+              padding: 0,
               textAlign: "justify",
+              marginLeft: '10%',
+              width: '80%'
             }}
           >
           No hemos detectado un QR escaneado o aun no ha sido activado,
-            Crea una ceunta , registrate con Google, escanea tu QR y activalo ahora. 
+            Crea una cuenta, registrate con Google, escanea tu QR y activalo ahora. 
           </div>
+        
             </div>
          
         )}

@@ -36,7 +36,7 @@ function App() {
 
   console.log("tag desde app", tag);
 
-  const backgroundImageURL0 =   "https://github.com/castrorestrepo/citas_react/blob/main/src/images/bacground4.jpg?raw=true";
+  const backgroundImageURL0 =   "/images/bacground6.jpg";
 
 
   const containerStyle0 = {

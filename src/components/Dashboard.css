@@ -2,13 +2,22 @@
    
     align-items: center;
     justify-content: center;
+    align-self: center;
+    
+   
   }
   .dashboard__container {
+    background-color: aliceblue;
     display: flex;
     flex-direction: column;
     text-align: center;
    align-self: center;
     padding: 0px;
+    width: 80%;
+    border-radius: 8px;
+    margin-left: 10%;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
   .dashboard__btn {
     padding: 10px;
