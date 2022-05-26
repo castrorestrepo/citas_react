@@ -35,6 +35,12 @@ const containerStyle = {
   height: "100%",
 };
 
+const img1 ="././public/images/bacground1.jpeg";
+  const img2 =".././public/images/bacground1.jpeg";
+  "https://github.com/castrorestrepo/citas_react/blob/main/src/images/fondo.jpeg?raw=true";
+
+
+
 function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -118,6 +124,10 @@ function Login(props) {
 
   return (
     <div className="login"  >
+       <img src={img1} className="avatar"></img>
+       <img src={img2} className="avatar"></img>
+           
+
       <h1 className="text-gray-400 text-center text-1xl">Codigo:</h1>
       <h1 className="text-red-500 text-center text-1xl ">
         {props.tag ? props.tag : "Codigo no escaneado"}{" "}
