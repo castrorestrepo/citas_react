@@ -36,7 +36,7 @@ function App() {
 
   console.log("tag desde app", tag);
 
-  const backgroundImageURL0 =   "/images/bacground6.jpg";
+  const backgroundImageURL0 =   "/images/fondo4.jpg";
 
 
   const containerStyle0 = {

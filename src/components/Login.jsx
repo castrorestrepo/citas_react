@@ -114,7 +114,7 @@ function Login(props) {
     }
   }, [user, loading]);
 
-  const backgroundImageURL0 = "images/bacground1.jpeg";
+  const backgroundImageURL0 = "images/fondo1.jpeg";
   const logo = "images/icon-id.png";
   
   
