@@ -114,6 +114,7 @@ function Login(props) {
   const backgroundImageURL0 = "images/fondo1.jpeg";
   const logo = "images/icon-id.png";
 
+
   return (
     <div className="login">
       <div className="header" style={containerStyle}></div>
@@ -155,14 +156,11 @@ function Login(props) {
             }}
           >
             <h1 className="text-pink-500  text-2xl">
-            <button
-            style={{ borderRadius: 20 }}
-            className="buy__btn"
-           // onClick={() => logInWithEmailAndPassword(email, password)}
-          >
-          !!!Comprar ahora
-          </button>
+            
               </h1>
+              <a  
+               style={{ borderRadius: 20 }}
+              className="buy__btn" target="_blank" href="https://wa.me/573153988090?text=Hola%20me%20interesa%20adquirir%20una%20placa%20%20pets%20ID%20o%20requiero%20ayuda">!!!Comprar ahora</a>
           </div>
         </div>
 

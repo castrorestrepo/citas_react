@@ -76,6 +76,10 @@ function App() {
               element={<Login setTag={setTag} tag={tag} props={tag} />}
             />
             <Route path="*" element={<Login />} />
+            <Route path='/privacy-policy' component={() => { 
+     window.location.href = 'https://example.com/1234'; 
+     return null;
+}}/>
           </Routes>
         </Router>
         <Footer></Footer>
