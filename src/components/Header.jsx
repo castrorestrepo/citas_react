@@ -2,7 +2,7 @@ import React from "react";
 import "./Login.css";
 
 export default function Header() {
-  const logo = "images/icon-id.png";
+  const logo = "images/icono2.png";
 
   return (
     <div
@@ -10,10 +10,9 @@ export default function Header() {
     style={{
       borderRadius: 8,
       textAlign: "center",
-      width: "80%",
-      marginLeft: "10%",
+      
       marginTop: "1%",
-      backgroundColor: "#C8D5E0",
+      backgroundColor: "white",
       borderColor: "red",
       position: 'relative',
     
@@ -25,6 +24,9 @@ export default function Header() {
       <h1 className="text-3xl text-center ">
       <span className="text-blue-400">  <img src={logo} className="logo" ></img> PetsID</span>{" "}
       </h1>
+      <h1 className="text-blue-400 text-center text-1xl">Identificación y localización de mascotas</h1>
+     
+   
 
     </div>
   );

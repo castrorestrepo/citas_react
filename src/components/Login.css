@@ -33,12 +33,34 @@
  width: 80%;
  padding-top: 10px;
  padding-bottom: 10px;
-
  border-radius: 50px;
 
 
- 
 }
+
+.tag1 {
+  text-align: center;
+  display: block;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  width: 150px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 50px;
+ 
+ }
+ .buy1 {
+  text-align: center;
+  display: block;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  width: 50px;
+
+  border-radius: 50px;
+ 
+ }
 .avatar2 {
   text-align: center;
   align-items: center;
@@ -58,6 +80,7 @@
   align-content: center;
   height: 100%;
   width: 100%;
+
   background-color: #dcdcdc;
  
   
@@ -126,8 +149,31 @@
   justify-content: center;
   align-items: center;
   margin: auto;
-  width: 70px;
-  height: 70px;
+  width: 50px;
+ 
   background-color: white;
   border-radius: 50px;
+}
+.horizontal {
+  display: flex;
+  flex-direction: row;
+  width: auto;
+  margin-top: 10px;
+  margin-left: 20px;
+}
+.vertical {
+  flex-direction: column;
+  width: 100%;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+.buy__btn {
+  padding: 6px;
+  font-size: 18px;
+  border: none;
+  color: rgb(255, 255, 255);
+  background-color: rgb(255, 117, 145);
+  width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
 }

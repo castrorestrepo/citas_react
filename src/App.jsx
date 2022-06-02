@@ -8,6 +8,7 @@ import Reset from "./components/Reset";
 import Dashboard from "./components/Dashboard";
 import { useParams } from "react-router";
 import "./app.css";
+import Footer from "./components/Footer";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -36,7 +37,7 @@ function App() {
 
   console.log("tag desde app", tag);
 
-  const backgroundImageURL0 =   "/images/fondo4.jpg";
+  const backgroundImageURL0 =   "/images/fondo27.jpg";
 
 
   const containerStyle0 = {
@@ -77,7 +78,9 @@ function App() {
             <Route path="*" element={<Login />} />
           </Routes>
         </Router>
+        <Footer></Footer>
       </div>
+    
       <div></div>
     </div>
   );

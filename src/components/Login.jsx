@@ -25,16 +25,14 @@ import { Avatar, Tag } from "antd";
 import { QuerySnapshot } from "firebase/firestore";
 import { async } from "@firebase/util";
 
-
-
-const backgroundImageURL =
-  "images/fondo.jpeg";
+const tag1 = "images/tag1.jpg";
+const buy1 = "images/buy1.webp";
+const backgroundImageURL = "images/fondo.jpeg";
 const containerStyle = {
   backgroundImage: `url(${backgroundImageURL})`,
   width: "100%",
   height: "100%",
 };
-
 
 function Login(props) {
   const [email, setEmail] = useState("");
@@ -76,13 +74,12 @@ function Login(props) {
       return;
     }
     if (user) {
-      
       navigate("/dashboard");
     }
     fetchTags();
 
     perfil ? props.setTag(id) : props.setTag("no Valido");
-  
+
     console.log("props en login:");
     console.log(props);
 
@@ -116,45 +113,109 @@ function Login(props) {
 
   const backgroundImageURL0 = "images/fondo1.jpeg";
   const logo = "images/icon-id.png";
-  
-  
 
   return (
-    <div className="login"  >
-           
-       <div className="header" style={containerStyle}>
-        
-      </div>
+    <div className="login">
+      <div className="header" style={containerStyle}></div>
 
       <div className="login__container">
         <br></br>
-      <h1 className="text-gray-400 text-center text-1xl">Codigo:</h1>
-      <h1 className="text-red-500 text-center text-1xl ">
-        {props.tag ? props.tag : "Codigo no escaneado"}{" "}
-      <br></br>  ¿Quieres comprar un tag ahora?
-      </h1>
-      
-    
+        <div className="horizontal">
+          <div className="vertical">
+            <h1 className="text-pink-500 text-justify text-2xl">
+              Placas QR Geniales!{" "}
+            </h1>
+            <h1 className="text-gray-600 text-justify text-1xl">
+              Permiten identificar por medio de la lectura del QR y recibir la
+              ubicación de tu mascota.{" "}
+            </h1>
+          </div>
+          <div className="vertical">
+            <img src={tag1} className="tag1"></img>
+          </div>
+        </div>
+        <br></br>
+        <div
+          style={{
+            display: "flex",
+            width: "100%",
+          }}
+        >
+          <div
+            style={{
+              alignContent: "left",
+              margin: "auto",
+            }}
+          >
+            <img src={buy1} className="buy1"></img>
+          </div>
+          <div
+            style={{
+              margin: "auto",
+            }}
+          >
+            <h1 className="text-pink-500  text-2xl">
+            <button
+            style={{ borderRadius: 20 }}
+            className="buy__btn"
+           // onClick={() => logInWithEmailAndPassword(email, password)}
+          >
+          !!!Comprar ahora
+          </button>
+              </h1>
+          </div>
+        </div>
+
+        <br></br>
+        <h1
+        style={{
+marginLeft: 20,
+marginRight: 20,
+marginBottom:20
+        }}
+        className="text-gray-600 text-center text-1xl">A continuación podras gestionar los datos de tu mascota:</h1>
+     
+        <div
+          style={{
+            alignContent: "center",
+            display: "flex",
+            width: "100%",
+            margin: "auto",
+          }}
+        >
+       
+          <div
+            style={{
+              margin: "auto",
+            }}
+          >
+            <h1 className="text-blue-500 text-center text-1xl">Codigo:</h1>
+          </div>
+          <div
+            style={{
+              margin: "auto",
+            }}
+          >
+            <h1 className="text-red-500 text-center text-1xl ">
+              {props.tag ? props.tag : "Codigo no escaneado"}{" "}
+            </h1>
+          </div>
+        </div>
+
         {perfil.propietario ? (
           <div
-          style={{
-           
-            width: "100%",
-          alignContent:"center"
-          }}
+            style={{
+              width: "100%",
+              alignContent: "center",
+            }}
           >
-            
             <span className="text-4xl  text-blue-500">
               Hola soy:
               {perfil.nombremascota}{" "}
-          
-        
             </span>
             <img src={imagen} className="avatar"></img>
-           
             <span className="text-1xl text-center "></span>{" "}
-            
-             <div
+            <div
               style={{
                 borderRadius: 8,
                 textAlign: "start",
@@ -163,7 +224,6 @@ function Login(props) {
                 marginRight: "10%",
                 backgroundColor: "#c7c7d7",
                 borderColor: "red",
-            
               }}
               className="text-left text-gray-500"
             >
@@ -187,7 +247,6 @@ function Login(props) {
               <span className="text-left  text-blue-500">Mensaje: </span>{" "}
               {perfil.mensaje}
             </div>
-        
             <div
               style={{
                 borderRadius: 8,
@@ -199,20 +258,18 @@ function Login(props) {
               }}
               className="text-left text-gray-500"
             ></div>
-        
             <h1
-            style={{
-             alignContent:'center',
-             textAlign:'center',
-             alignItems:'center',
-              width: '90%',
-              marginLeft:'4%',
-              marginRight:'4%'
+              style={{
+                alignContent: "center",
+                textAlign: "center",
+                alignItems: "center",
+                width: "90%",
+                marginLeft: "4%",
+                marginRight: "4%",
               }}
             >
-               
-Si eres propietario de un tag de PetsID, puedes iniciar sesión a continuación para registrar o actualizar datos de tu mascota
-         
+              Si eres propietario de un tag de PetsID, puedes iniciar sesión a
+              continuación para registrar o actualizar datos de tu mascota
             </h1>
           </div>
         ) : props.tag == "No valido" ? (
@@ -222,27 +279,26 @@ Si eres propietario de un tag de PetsID, puedes iniciar sesión a continuación 
             se encontró en la base de datos.
           </div>
         ) : (
-          <div> Bienvenido a PetsID
-          <div
-            style={{
-              padding: 0,
-              textAlign: "justify",
-              marginLeft: '10%',
-              width: '80%'
-            }}
-          >
-          No hemos detectado un QR escaneado o aun no ha sido activado,
-            Crea una cuenta, registrate con Google, escanea tu QR y activalo ahora. 
-          </div>
-        
+          <div>
+            <div
+              style={{
+                padding: 0,
+                textAlign: "justify",
+                marginLeft: "10%",
+                width: "80%",
+              }}
+              className="text-left text-gray-600"
+            >
+              No hemos detectado un QR escaneado o aún no ha sido activado, crea
+              una cuenta, regístrate con Google, escanea tu QR y actívalo ahora.
             </div>
-         
+          </div>
         )}
 
         <div className="login">
           <input
             type="text"
-            style={{borderRadius:8}}
+            style={{ borderRadius: 8 }}
             className="login__textBox"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -251,7 +307,7 @@ Si eres propietario de un tag de PetsID, puedes iniciar sesión a continuación 
           <br></br>
           <input
             type="password"
-            style={{borderRadius:8}}
+            style={{ borderRadius: 8 }}
             className="login__textBox"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -259,7 +315,7 @@ Si eres propietario de un tag de PetsID, puedes iniciar sesión a continuación 
           />
           <br></br>
           <button
-          style={{borderRadius:8}}
+            style={{ borderRadius: 8 }}
             className="login__btn"
             onClick={() => logInWithEmailAndPassword(email, password)}
           >
@@ -269,7 +325,7 @@ Si eres propietario de un tag de PetsID, puedes iniciar sesión a continuación 
           <button
             className="login__btn login__google"
             onClick={signInWithGoogle}
-            style={{borderRadius:8}}
+            style={{ borderRadius: 8 }}
           >
             Login with Google
           </button>
@@ -296,17 +352,7 @@ Si eres propietario de un tag de PetsID, puedes iniciar sesión a continuación 
           width: "100%",
           fontSize: 8,
         }}
-      >
-        <span className="text-gray-400 text-center ">
-          Petsid.com.co es un sistema de identificación de mascotas, la
-          información depositada por sus propietarios, será tratada conforma la
-          ley 1581 de 2022 y decretos reglamentario; no entregamos su
-          información a otras compañias, no obstante si su mascota se extravia y
-          alguien escanea el QR, podra conocer su nombre y datos de contacto,
-          para lo cual al usar y registrar un tag, autoriza que susdatos sean
-          expuestos ante la lectura del QR.
-        </span>
-      </div>
+      ></div>
     </div>
   );
 }
