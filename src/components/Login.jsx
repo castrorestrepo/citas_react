@@ -127,8 +127,7 @@ function Login(props) {
               Placas QR Geniales!{" "}
             </h1>
             <h1 className="text-gray-600 text-justify text-1xl">
-              Permiten identificar por medio de la lectura del QR y recibir la
-              ubicación de tu mascota.{" "}
+              Permiten identificar tu mascota y su ubicacion, en el momento de lectura de su placa con cualquier dispotivio movil.{" "}
             </h1>
           </div>
           <div className="vertical">
@@ -182,20 +181,20 @@ marginBottom:20
           }}
         >
        
-          <div
-            style={{
-              margin: "auto",
-            }}
-          >
-            <h1 className="text-blue-500 text-center text-1xl">Codigo:</h1>
-          </div>
+       
+
+          
           <div
             style={{
               margin: "auto",
             }}
           >
             <h1 className="text-red-500 text-center text-1xl ">
-              {props.tag ? props.tag : "Codigo no escaneado"}{" "}
+              {props.tag ? 
+              <div>
+               Codigo: {props.tag}
+              </div>
+               : "Codigo no escaneado"}{" "}
             </h1>
           </div>
         </div>

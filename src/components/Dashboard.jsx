@@ -14,7 +14,13 @@ import {
   updateDoc,
   doc,
 } from "firebase/firestore";
-import { ref, getDownloadURL } from "firebase/storage";
+import {
+  ref,
+  getDownloadURL,
+  getStorage,
+  uploadBytesResumable,
+  uploadBytes,
+} from "firebase/storage";
 
 import { async } from "@firebase/util";
 import { Card } from "antd";
@@ -25,6 +31,9 @@ function Dashboard(props) {
   const [name, setName] = useState("");
   const [propietario, setPropietario] = useState(true);
   const [editing, setEditing] = useState(false);
+  const [Imagen, setImagen] = useState();
+  const [msgUploadImage ,setmsgUploadImage ] = useState("");
+  const storage = getStorage();
 
   const [mascotas, setMascotas] = useState([]);
   const [mascotas2, setMasctoas2] = useState([]);
@@ -49,12 +58,12 @@ function Dashboard(props) {
     try {
       console.log("entro a fetchuser");
       //consultar los datos del usuarios
-      console.log("user primer vez:",user)
+      console.log("user primer vez:", user);
       const q = query(collection(db, "users"), where("uid", "==", user?.uid));
       const doc = await getDocs(q);
       const data = doc.docs[0].data();
       //setName(data.name);
-     
+
       console.log("usser", user);
       console.log("termino fethc user:", data);
     } catch (err) {
@@ -109,7 +118,6 @@ function Dashboard(props) {
     listar();
     listar2();
     setEditing(false);
-   
   };
   const mostrar = () => {
     console.log(props.props);
@@ -222,6 +230,48 @@ function Dashboard(props) {
       console.error(err);
       //  props.setTag(["No valido"]);
       // alert("Tag no valido error al consultar el Tag en la Base de datos");
+    }
+  };
+
+  //cargar imagen
+  //OBTENIENDO LA IMAGEN
+  const changeImagen = (e) => {
+    if (e.target.files[0].size > 10000000) {
+      alert("Imagen no permitida , mayor de 10 MB")
+      console.log("error imagen mayor de 1 MB" + e.target.files[0].size);
+    } else {
+      //setImagen(e.target.files[0]);
+      try {
+        console.log("dato", mascota);
+        const foto = mascota.id + ".jpg";
+        const storageRef = ref(storage, foto);
+        uploadBytes(storageRef, e.target.files[0]).then((snapshot) => {
+          console.log("Archivo cargado a firebase!");
+          setmsgUploadImage("Imagen Actualizada")
+          listar2();
+        });
+      } catch (error) {
+        alert(error);
+      }
+      console.log(Imagen);
+    }
+
+  };
+
+  //metodo para usar carga a firebase pero con boton de accion 
+  //se genera nueva verion que carga inmediatamente despues de seleccionar el file sin requerrir nueva accion de usuario 
+
+  const uploadImage = async () => {
+    try {
+      console.log("dato", mascota);
+      const foto = mascota.id + ".jpg";
+      const storageRef = ref(storage, foto);
+      uploadBytes(storageRef, Imagen).then((snapshot) => {
+        console.log("Archivo cargado a firebase!");
+        listar2();
+      });
+    } catch (error) {
+      alert(error);
     }
   };
 
@@ -349,6 +399,7 @@ function Dashboard(props) {
                     >
                       <td>Mensaje:{dato.mensaje}</td>
                     </tr>
+
                     <br></br>
                     <button
                       className="edit__btn"
@@ -399,7 +450,7 @@ function Dashboard(props) {
               <div></div>
             </span>
             <br></br>
-            Propietario de la mascota: <br></br>
+            Propietario: <br></br>
             <input
               id="propietario"
               value={mascota.propietario}
@@ -408,6 +459,14 @@ function Dashboard(props) {
               className="normal__txt"
             ></input>
             <br></br>
+            <p>Nombre de la mascota:</p>
+            <input
+              id="nombremascota"
+              value={mascota.nombremascota}
+              //onChange={(e) => onChange(e.target.value)}
+              onChange={(e) => onChange(e)}
+              className="normal__txt"
+            ></input>
             <p> Celular de contacto: </p>
             <input
               id="celular"
@@ -420,14 +479,6 @@ function Dashboard(props) {
             <input
               id="pin"
               value={mascota.pin}
-              //onChange={(e) => onChange(e.target.value)}
-              onChange={(e) => onChange(e)}
-              className="normal__txt"
-            ></input>
-            <p>Nombre de la mascota:</p>
-            <input
-              id="nombremascota"
-              value={mascota.nombremascota}
               //onChange={(e) => onChange(e.target.value)}
               onChange={(e) => onChange(e)}
               className="normal__txt"
@@ -464,6 +515,22 @@ function Dashboard(props) {
               onChange={(e) => onChange(e)}
               className="normal__txt"
             ></input>
+            <aside id="modal">
+              <div>
+                <header>
+                  <br></br>
+                  <h1>Cambiar Imagen</h1>
+                  {msgUploadImage}
+                  <input
+                    id="file"
+                    type="file"
+                    name="imagen"
+                    onChange={changeImagen}
+                  />
+
+                </header>
+              </div>
+            </aside>
             <p>
               <br></br>
               {propietario ? (
