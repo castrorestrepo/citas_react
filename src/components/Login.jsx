@@ -1,5 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faLocationDot,
+  faQrcode,
+  faCircleInfo,
+  faPhone,
+  faRegistered,
+  faCartPlus,
+  faUser,
+  faCalendar,
+  faDog,
+  faSyringe,
+  faCommentDots,
+} from "@fortawesome/free-solid-svg-icons";
+
 import {
   auth,
   logInWithEmailAndPassword,
@@ -114,7 +129,6 @@ function Login(props) {
   const backgroundImageURL0 = "images/fondo1.jpeg";
   const logo = "images/icon-id.png";
 
-
   return (
     <div className="login">
       <div className="header" style={containerStyle}></div>
@@ -123,11 +137,12 @@ function Login(props) {
         <br></br>
         <div className="horizontal">
           <div className="vertical">
-            <h1 className="text-pink-500 text-justify text-2xl">
-              Placas QR Geniales!{" "}
+            <h1 className="text-blue-500 text-justify text-2xl">
+              Placas <FontAwesomeIcon icon={faQrcode} /> QR Geniales!{" "}
             </h1>
             <h1 className="text-gray-600 text-justify text-1xl">
-              Permiten identificar tu mascota y su ubicacion, en el momento de lectura de su placa con cualquier dispotivio movil.{" "}
+              Permiten identificar tu mascota y su ubicacion, en el momento de
+              lectura de su placa con cualquier dispotivio movil.{" "}
             </h1>
           </div>
           <div className="vertical">
@@ -143,35 +158,34 @@ function Login(props) {
         >
           <div
             style={{
-              alignContent: "left",
               margin: "auto",
+              alignContent: "center",
             }}
           >
-            <img src={buy1} className="buy1"></img>
-          </div>
-          <div
-            style={{
-              margin: "auto",
-            }}
-          >
-            <h1 className="text-pink-500  text-2xl">
-            
-              </h1>
-              <a  
-               style={{ borderRadius: 20 }}
-              className="buy__btn" target="_blank" href="https://wa.me/573153988090?text=Hola%20me%20interesa%20adquirir%20una%20placa%20%20pets%20ID%20o%20requiero%20ayuda">!!!Comprar ahora</a>
+            <h1 className="text-blue-500  text-2xl"></h1>
+            <a
+              style={{ borderRadius: 20 }}
+              className="buy__btn"
+              target="_blank"
+              href="https://wa.me/573153988090?text=Hola%20me%20interesa%20adquirir%20una%20placa%20%20pets%20ID%20o%20requiero%20ayuda"
+            >
+              !!!Comprar ahora <FontAwesomeIcon icon={faCartPlus} />{" "}
+            </a>
           </div>
         </div>
 
         <br></br>
         <h1
-        style={{
-marginLeft: 20,
-marginRight: 20,
-marginBottom:20
-        }}
-        className="text-gray-600 text-center text-1xl">A continuación podras gestionar los datos de tu mascota:</h1>
-     
+          style={{
+            marginLeft: 20,
+            marginRight: 20,
+            marginBottom: 20,
+          }}
+          className="text-gray-600 text-center text-1xl"
+        >
+          A continuación podras gestionar los datos de tu mascota:
+        </h1>
+
         <div
           style={{
             alignContent: "center",
@@ -180,21 +194,17 @@ marginBottom:20
             margin: "auto",
           }}
         >
-       
-       
-
-          
           <div
             style={{
               margin: "auto",
             }}
           >
             <h1 className="text-red-500 text-center text-1xl ">
-              {props.tag ? 
-              <div>
-               Codigo: {props.tag}
-              </div>
-               : "Codigo no escaneado"}{" "}
+              {props.tag ? (
+                <div>Codigo: {props.tag}</div>
+              ) : (
+                "Codigo no escaneado"
+              )}{" "}
             </h1>
           </div>
         </div>
@@ -219,29 +229,44 @@ marginBottom:20
                 width: "80%",
                 marginLeft: "10%",
                 marginRight: "10%",
-                backgroundColor: "#c7c7d7",
+                backgroundColor: "#BDC3C7",
                 borderColor: "red",
               }}
               className="text-left text-gray-500"
             >
-              <h1> Mi propietario es : {perfil.propietario}</h1> Su número es:
-              <span className="text-red-500 text-center text-1xl ">
+              <h1>
                 {" "}
-                {perfil.celular}{" "}
-              </span>
-              <br></br>
+                <span className="text-blue-500 text-center text-1xl ">
+                  <FontAwesomeIcon icon={faUser} /> Mi propietario es :{" "}
+                </span>{" "}
+                {perfil.propietario}
+              </h1>
+              <span className="text-blue-500 text-center text-1xl ">
+                <FontAwesomeIcon icon={faPhone} /> Su número es:{" "}
+              </span>{" "}
+              {perfil.celular} <br></br>
               <span className="text-left  text-blue-500">
-                Fecha de nacimiento:{" "}
+                <FontAwesomeIcon icon={faCalendar} /> Fecha de nacimiento:{" "}
               </span>{" "}
               {perfil.fechanacimiento}
               <br></br>
-              <span className="text-left  text-blue-500">Raza: </span>{" "}
+              <span className="text-left  text-blue-500">
+                {" "}
+                <FontAwesomeIcon icon={faDog} />
+                Raza:{" "}
+              </span>{" "}
               {perfil.raza}
               <br></br>
-              <span className="text-left  text-blue-500">Alergias: </span>{" "}
+              <span className="text-left  text-blue-500">
+                <FontAwesomeIcon icon={faSyringe} />
+                Alergias:{" "}
+              </span>{" "}
               {perfil.alergias}
               <br></br>
-              <span className="text-left  text-blue-500">Mensaje: </span>{" "}
+              <span className="text-left  text-blue-500">
+                <FontAwesomeIcon icon={faCommentDots} />
+                Mensaje:{" "}
+              </span>{" "}
               {perfil.mensaje}
             </div>
             <div
@@ -334,11 +359,13 @@ marginBottom:20
           </div>
           <br></br>
           <span className="text-red-400 text-center ">
-            Todos los derechos reservados Petsid.com.co.{" "}
+            <FontAwesomeIcon icon={faRegistered} /> Todos los derechos
+            reservados Petsid.com.co.{" "}
           </span>
           <br></br>
           <span className="text-blue-400 text-center ">
-            Requieres ayuda? llama a la linea 3167482109{" "}
+            <FontAwesomeIcon icon={faCircleInfo} /> Requieres ayuda? <br></br>
+            <FontAwesomeIcon icon={faPhone} /> llama a la linea 3167482109{" "}
           </span>
         </div>
       </div>

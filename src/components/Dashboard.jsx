@@ -2,6 +2,25 @@ import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate, useParams } from "react-router-dom";
 import "./Dashboard.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faLocationDot,
+  faQrcode,
+  faCircleInfo,
+  faPhone,
+  faRegistered,
+  faCartPlus,
+  faUser,
+  faCalendar,
+  faDog,
+  faSyringe,
+  faCommentDots,
+  faKey,
+  faCamera,
+  faPencil,
+  faFloppyDisk
+
+} from "@fortawesome/free-solid-svg-icons";
 
 import { auth, db, logout, storage } from "../service/firebase";
 
@@ -279,8 +298,8 @@ function Dashboard(props) {
     <div className="dashboard">
       <div className="dashboard__container">
         <br></br>
-        Hola {name ? name : "no name"}
-        <div>{user?.email}</div>
+        Hola  {name ? name  : "no name"}
+        <div> <FontAwesomeIcon icon={faUser} /> {" "}{user?.email}</div>
         <br></br>
         Tus mascotas actuales son:
         <div>
@@ -341,6 +360,7 @@ function Dashboard(props) {
                         <br></br>{" "}
                         <h1 className="text-red-500 text-1xl ">
                           {" "}
+                          <FontAwesomeIcon icon={faQrcode} />
                           Tag:{dato.id}{" "}
                         </h1>
                       </td>
@@ -352,7 +372,9 @@ function Dashboard(props) {
                         width: "100%",
                       }}
                     >
-                      <td>Propietario:{dato.propietario}</td>
+                      <td>
+                      <FontAwesomeIcon icon={faUser} />{" "}
+                        Propietario:{dato.propietario}</td>
                     </tr>
                     <tr
                       style={{
@@ -361,7 +383,10 @@ function Dashboard(props) {
                         width: "100%",
                       }}
                     >
-                      <td>Celular de Contacto:{dato.celular}</td>
+                      <td>
+                        
+                      <FontAwesomeIcon icon={faPhone} />{" "}
+                        Celular:{dato.celular}</td>
                     </tr>
                     <tr
                       style={{
@@ -370,7 +395,9 @@ function Dashboard(props) {
                         width: "100%",
                       }}
                     >
-                      <td>Fecha de nacimiento:{dato.fechanacimiento}</td>
+                      <td>
+                      <FontAwesomeIcon icon={faCalendar} />{" "}
+                        Fecha de nacimiento:{dato.fechanacimiento}</td>
                     </tr>
                     <tr
                       style={{
@@ -379,7 +406,9 @@ function Dashboard(props) {
                         width: "100%",
                       }}
                     >
-                      <td>Raza:{dato.raza}</td>
+                      <td>
+                      <FontAwesomeIcon icon={faDog} />{" "}
+                        Raza:{dato.raza}</td>
                     </tr>
                     <tr
                       style={{
@@ -388,7 +417,9 @@ function Dashboard(props) {
                         width: "100%",
                       }}
                     >
-                      <td>Alergias:{dato.alergias}</td>
+                      <td>
+                      <FontAwesomeIcon icon={faSyringe} />{" "}
+                        Alergias:{dato.alergias}</td>
                     </tr>
                     <tr
                       style={{
@@ -397,7 +428,9 @@ function Dashboard(props) {
                         width: "100%",
                       }}
                     >
-                      <td>Mensaje:{dato.mensaje}</td>
+                      <td>
+                      <FontAwesomeIcon icon={faCommentDots} />{" "}
+                        Mensaje:{dato.mensaje}</td>
                     </tr>
 
                     <br></br>
@@ -410,7 +443,7 @@ function Dashboard(props) {
                         )
                       }
                     >
-                      Modificar
+                      <FontAwesomeIcon icon={faPencil} /> Modificar
                     </button>
                   </Card>
                 ))}
@@ -442,7 +475,7 @@ function Dashboard(props) {
               }}
             >
               Ingrese o modifique los datos de su mascota.
-            </div>
+            </div>  <FontAwesomeIcon icon={faQrcode} />{" "}
             TAG Número:
             <span className="text-red-500 text-center text-1xl ">
               {" "}
@@ -450,6 +483,8 @@ function Dashboard(props) {
               <div></div>
             </span>
             <br></br>
+            <FontAwesomeIcon icon={faUser} /> {" "}
+          
             Propietario: <br></br>
             <input
               id="propietario"
@@ -459,7 +494,9 @@ function Dashboard(props) {
               className="normal__txt"
             ></input>
             <br></br>
-            <p>Nombre de la mascota:</p>
+           
+            <p> <FontAwesomeIcon icon={faDog} /> {" "}
+           Nombre de la mascota:</p>
             <input
               id="nombremascota"
               value={mascota.nombremascota}
@@ -467,7 +504,8 @@ function Dashboard(props) {
               onChange={(e) => onChange(e)}
               className="normal__txt"
             ></input>
-            <p> Celular de contacto: </p>
+            <p>   <FontAwesomeIcon icon={faPhone} /> {" "}
+            Celular de contacto: </p>
             <input
               id="celular"
               value={mascota.celular}
@@ -475,7 +513,8 @@ function Dashboard(props) {
               onChange={(e) => onChange(e)}
               className="normal__txt"
             ></input>
-            <p>Asigne un pin de seguridad:</p>
+            <p>  <FontAwesomeIcon icon={faKey} />{" "}
+            Asigne un pin de seguridad:</p>
             <input
               id="pin"
               value={mascota.pin}
@@ -483,7 +522,8 @@ function Dashboard(props) {
               onChange={(e) => onChange(e)}
               className="normal__txt"
             ></input>
-            <p>Fecha nacimiento :</p>
+            <p>   <FontAwesomeIcon icon={faCalendar} /> {" "}
+            Fecha nacimiento :</p>
             <input
               id="fechanacimiento"
               value={mascota.fechanacimiento}
@@ -491,7 +531,8 @@ function Dashboard(props) {
               onChange={(e) => onChange(e)}
               className="normal__txt"
             ></input>
-            <p>Raza :</p>
+            <p>   <FontAwesomeIcon icon={faDog} /> {" "}
+            Raza :</p>
             <input
               id="raza"
               value={mascota.raza}
@@ -499,7 +540,7 @@ function Dashboard(props) {
               onChange={(e) => onChange(e)}
               className="normal__txt"
             ></input>
-            <p>Alergias :</p>
+            <p>   <FontAwesomeIcon icon={faSyringe} />Alergias :</p>
             <input
               id="alergias"
               value={mascota.alergias}
@@ -507,7 +548,8 @@ function Dashboard(props) {
               onChange={(e) => onChange(e)}
               className="normal__txt"
             ></input>
-            <p>Mensaje personalizado para mostrar a quien escanea el codigo:</p>
+            <p>   <FontAwesomeIcon icon={faCommentDots} />{" "}
+            Mensaje personalizado para mostrar a quien escanea el codigo:</p>
             <input
               id="mensaje"
               value={mascota.mensaje}
@@ -519,7 +561,7 @@ function Dashboard(props) {
               <div>
                 <header>
                   <br></br>
-                  <h1>Cambiar Imagen</h1>
+                  <h1>  <FontAwesomeIcon icon={faCamera} /> {" "}Cambiar Imagen</h1>
                   {msgUploadImage}
                   <input
                     id="file"
@@ -535,7 +577,7 @@ function Dashboard(props) {
               <br></br>
               {propietario ? (
                 <button className="normal__btn" onClick={actualizar}>
-                  Gardar
+                   <FontAwesomeIcon icon={faFloppyDisk} /> {" "}Gardar
                 </button>
               ) : (
                 <div>
