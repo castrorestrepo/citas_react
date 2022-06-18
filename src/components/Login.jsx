@@ -30,6 +30,8 @@ import {
   where,
   documentId,
   doc,
+  updateDoc,
+  addDoc
 } from "firebase/firestore";
 import { ref, getDownloadURL } from "firebase/storage";
 
@@ -58,6 +60,53 @@ function Login(props) {
   const { id } = useParams();
 
   const [imagen, setImagen] = useState("");
+
+
+  const enviarlocalizacion = async (position) => {
+    console.log("iniciando envio gps",position)
+  
+    try {
+      const docRef = await addDoc(collection(db, "PetsId mail"), {
+        to: "julianandresrestrepocastro@gmail.com",
+        message: {
+          subject: "Tu mascota ha sido ubicada",
+         // text: "hemos detectado que el perfil de tu mascota fue escaneado, la ubicacion actual es:",
+         // html: " <code><h1>Hemos detectado que de tu mascota ha sido escaneado Ubicacion de tu mascota:</h1> <a href=`http://maps.google.com/?q=6.1754948,-75.6298538`> Ver ubicación</a>" 
+           html: `
+           <p><img alt="" src="https://www.petsid.com.co/images/icono2.png" style="height:56px; width:50px" /><span style="font-size:28px"><strong><span style="color:#2980b9">PetsID</span></strong></span></p>
+
+           <p><span style="font-size:18px"><span style="color:#2980b9"><strong>Hemos detectado que la placa de tu mascota ha sido escaneada!</strong></span></span></p>
+           
+           <p><span style="font-size:14px"><strong><span style="color:#2980b9">Para ver la ubicacion presiona en el siguiente link:</span></strong></span></p>
+           
+           <p><span style="font-size:14px"><strong><a href="http://maps.google.com/?q=`+ position.coords.latitude + "," + position.coords.longitude + `
+           
+           " ><span style="color:#ffffff"><span style="background-color:#3498db">Ver ubicacion&nbsp;</span></span></a></strong></span></p>
+           
+           <p><span style="font-size:14px"><span style="color:#2980b9">Si deseas conocer mas de nuestros servicios</span></span></p>
+           
+           <p><span style="font-size:14px"><span style="color:#2980b9">visita <a href="https://www.petsid.com.co">www.petsid.com.co</a></span></span></p>
+           
+           <p><span style="font-size:14px"><span style="color:#2980b9">Visita nuestro instagram: <a href="https://www.instagram.com/petsid.com.co/">@petsid.com.co</a></span></span></p>
+           
+           <hr />
+           <p style="text-align:center"><span style="color:#999999"><span style="font-size:10px">Tienda Fisica : crr 66 39 a 21 Itagui Antioquia Colombia.&nbsp;</span></span></p>
+           
+           <p style="text-align:center"><span style="color:#999999"><span style="font-size:10px">Comunicate a la linea: 3167482109</span></span></p>
+           
+           <p style="text-align:center"><span style="color:#999999"><span style="font-size:10px">By Juli&aacute;n Andr&eacute;s Restrepo Castro</span></span></p>
+           
+           `
+        }
+      });
+      console.log("Document mail location written with ID: ", docRef.id);
+  
+    } catch (error) {
+      console.log("error al guardar", error);
+    }
+  
+  
+  };
 
   const fetchTags = async () => {
     try {
@@ -114,13 +163,20 @@ function Login(props) {
           })
       : null;
 
+
+      //obtener localizacion 
     if ("geolocation" in navigator) {
       console.log("Available");
       navigator.geolocation.getCurrentPosition(function (position) {
         console.log("Latitude is :", position.coords.latitude);
         console.log("Longitude is :", position.coords.longitude);
-        console.log(position);
+        console.log(position.Link);
+        const ubicacion = (position)
+        enviarlocalizacion(ubicacion)
+
       });
+      
+
     } else {
       console.log("Not Available");
     }
