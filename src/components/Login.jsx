@@ -66,7 +66,7 @@ function Login(props) {
     console.log("iniciando envio gps",position)
   
     try {
-      const docRef = await addDoc(collection(db, "PetsId mail"), {
+      const docRef = await addDoc(collection(db, "PetsIdmail"), {
         to: "julianandresrestrepocastro@gmail.com",
         message: {
           subject: "Tu mascota ha sido ubicada",
