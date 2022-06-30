@@ -18,8 +18,8 @@ import {
   faKey,
   faCamera,
   faPencil,
-  faFloppyDisk
-
+  faFloppyDisk,
+  faPaperPlane
 } from "@fortawesome/free-solid-svg-icons";
 
 import { auth, db, logout, storage } from "../service/firebase";
@@ -59,6 +59,7 @@ function Dashboard(props) {
   const [mascota, setMascota] = useState({
     propietario: "",
     celular: "",
+    correo: "",
     pin: "",
     nombremascota: "",
     fechanacimiento: "",
@@ -396,6 +397,18 @@ function Dashboard(props) {
                       }}
                     >
                       <td>
+                    
+                      <FontAwesomeIcon icon={faPaperPlane} />{" "}
+                       Mail:{dato.correo}</td>
+                    </tr>
+                    <tr
+                      style={{
+                        borderRadius: 8,
+                        textAlign: "start",
+                        width: "100%",
+                      }}
+                    >
+                      <td>
                       <FontAwesomeIcon icon={faCalendar} />{" "}
                         Fecha de nacimiento:{dato.fechanacimiento}</td>
                     </tr>
@@ -513,6 +526,17 @@ function Dashboard(props) {
               onChange={(e) => onChange(e)}
               className="normal__txt"
             ></input>
+
+          <p>   <FontAwesomeIcon icon={faPhone} /> {" "}
+            Correo de notificación: </p>
+            <input
+              id="correo"
+              value={mascota.correo}
+              //onChange={(e) => onChange(e.target.value)}
+              onChange={(e) => onChange(e)}
+              className="normal__txt"
+            ></input>
+
             <p>  <FontAwesomeIcon icon={faKey} />{" "}
             Asigne un pin de seguridad:</p>
             <input

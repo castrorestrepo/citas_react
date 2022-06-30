@@ -12,12 +12,12 @@
   text-align: center;
 }
 .header {
-  padding: 22%;
-  height: 80%;
-  width: 100%;
-  background-size: cover;
+  padding: 19%;
+  
+  background-size:cover;
+ 
   background-repeat: no-repeat;
-  justify-content: center;
+  justify-content:stretch;
   border-radius: 9px;
 }
 

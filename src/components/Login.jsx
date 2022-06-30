@@ -31,7 +31,7 @@ import {
   documentId,
   doc,
   updateDoc,
-  addDoc
+  addDoc,
 } from "firebase/firestore";
 import { ref, getDownloadURL } from "firebase/storage";
 
@@ -47,8 +47,7 @@ const buy1 = "images/buy1.webp";
 const backgroundImageURL = "images/fondo.jpeg";
 const containerStyle = {
   backgroundImage: `url(${backgroundImageURL})`,
-  width: "100%",
-  height: "100%",
+
 };
 
 function Login(props) {
@@ -62,24 +61,30 @@ function Login(props) {
   const [imagen, setImagen] = useState("");
 
 
-  const enviarlocalizacion = async (position) => {
-    console.log("iniciando envio gps",position)
   
-    try {
-      const docRef = await addDoc(collection(db, "PetsIdmail"), {
-        to: "julianandresrestrepocastro@gmail.com",
-        message: {
-          subject: "Tu mascota ha sido ubicada",
-         // text: "hemos detectado que el perfil de tu mascota fue escaneado, la ubicacion actual es:",
-         // html: " <code><h1>Hemos detectado que de tu mascota ha sido escaneado Ubicacion de tu mascota:</h1> <a href=`http://maps.google.com/?q=6.1754948,-75.6298538`> Ver ubicación</a>" 
-           html: `
+  const enviarlocalizacion = async (position) => {
+    console.log("iniciando envio gps", position);
+    if (perfil.correo) {
+      try {
+        const docRef = await addDoc(collection(db, "PetsIdmail"), {
+          to: perfil.correo,
+          message: {
+            subject: "Tu mascota ha sido ubicada",
+            // text: "hemos detectado que el perfil de tu mascota fue escaneado, la ubicacion actual es:",
+            // html: " <code><h1>Hemos detectado que de tu mascota ha sido escaneado Ubicacion de tu mascota:</h1> <a href=`http://maps.google.com/?q=6.1754948,-75.6298538`> Ver ubicación</a>"
+            html:
+              `
            <p><img alt="" src="https://www.petsid.com.co/images/icono2.png" style="height:56px; width:50px" /><span style="font-size:28px"><strong><span style="color:#2980b9">PetsID</span></strong></span></p>
 
            <p><span style="font-size:18px"><span style="color:#2980b9"><strong>Hemos detectado que la placa de tu mascota ha sido escaneada!</strong></span></span></p>
            
            <p><span style="font-size:14px"><strong><span style="color:#2980b9">Para ver la ubicacion presiona en el siguiente link:</span></strong></span></p>
            
-           <p><span style="font-size:14px"><strong><a href="http://maps.google.com/?q=`+ position.coords.latitude + "," + position.coords.longitude + `
+           <p><span style="font-size:14px"><strong><a href="http://maps.google.com/?q=` +
+              position.coords.latitude +
+              "," +
+              position.coords.longitude +
+              `
            
            " ><span style="color:#ffffff"><span style="background-color:#3498db">Ver ubicacion&nbsp;</span></span></a></strong></span></p>
            
@@ -96,16 +101,17 @@ function Login(props) {
            
            <p style="text-align:center"><span style="color:#999999"><span style="font-size:10px">By Juli&aacute;n Andr&eacute;s Restrepo Castro</span></span></p>
            
-           `
-        }
-      });
-      console.log("Document mail location written with ID: ", docRef.id);
-  
-    } catch (error) {
-      console.log("error al guardar", error);
+           `,
+          },
+        });
+        console.log("Document mail location written with ID: ", docRef.id);
+      } catch (error) {
+        console.log("error al guardar", error);
+      }
     }
-  
-  
+    else{
+      console.log("no se puedo enviar correo de ubicacion, mascota registrada sin Correo", perfil.correo)
+    }
   };
 
   const fetchTags = async () => {
@@ -157,30 +163,34 @@ function Login(props) {
             // Or inserted into an <img> element
             //const img = document.getElementById('myimg');
             //img.setAttribute('src', url);
+       
           })
           .catch((error) => {
             // Handle any errors
           })
       : null;
 
+ //perfil.correo ? console.log("hay perfil", perfil.correo) : console.log("no hay peerfil", perfil.correo)
+     
+     
+    //obtener localizacion
 
-      //obtener localizacion 
-    if ("geolocation" in navigator) {
-      console.log("Available");
-      navigator.geolocation.getCurrentPosition(function (position) {
-        console.log("Latitude is :", position.coords.latitude);
-        console.log("Longitude is :", position.coords.longitude);
-        console.log(position.Link);
-        const ubicacion = (position)
-        enviarlocalizacion(ubicacion)
-
-      });
-      
-
-    } else {
-      console.log("Not Available");
+    if (perfil.correo != ""){
+      if ("geolocation" in navigator) {
+        console.log("Localizacion valida");
+        navigator.geolocation.getCurrentPosition(function (position) {
+          console.log("Latitude is :", position.coords.latitude);
+          console.log("Longitude is :", position.coords.longitude);
+          console.log(position.Link);
+          const ubicacion = position;
+          enviarlocalizacion(ubicacion);
+        });
+      } else {
+        console.log("No hya correo para envio de localizacion");
+      }
     }
-  }, [user, loading]);
+   
+  }, [user, loading, perfil.correo]);
 
   const backgroundImageURL0 = "images/fondo1.jpeg";
   const logo = "images/icon-id.png";
@@ -301,6 +311,10 @@ function Login(props) {
                 <FontAwesomeIcon icon={faPhone} /> Su número es:{" "}
               </span>{" "}
               {perfil.celular} <br></br>
+              <span className="text-blue-500 text-center text-1xl ">
+                <FontAwesomeIcon icon={faPhone} /> Email:{" "}
+              </span>{" "}
+              {perfil.correo} <br></br>
               <span className="text-left  text-blue-500">
                 <FontAwesomeIcon icon={faCalendar} /> Fecha de nacimiento:{" "}
               </span>{" "}
